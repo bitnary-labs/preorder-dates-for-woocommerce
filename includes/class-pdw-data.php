@@ -75,6 +75,43 @@ class PDW_Data {
 	}
 
 	/**
+	 * Finds the variation that is open for pre-order and ships soonest, to
+	 * summarize a variable product's pre-order status where only one line can
+	 * be shown (shop loop, and the product page before a variation is picked).
+	 * Falls back to the first open variation found when none has a release
+	 * date set.
+	 *
+	 * @param WC_Product_Variable $product Variable product.
+	 * @return WC_Product_Variation|null
+	 */
+	public static function get_nearest_open_variation( WC_Product_Variable $product ) {
+		$fallback        = null;
+		$nearest         = null;
+		$nearest_release = 0;
+
+		foreach ( $product->get_children() as $variation_id ) {
+			$variation = wc_get_product( $variation_id );
+
+			if ( ! $variation instanceof WC_Product_Variation || 'open' !== self::get_state( $variation ) ) {
+				continue;
+			}
+
+			if ( ! $fallback ) {
+				$fallback = $variation;
+			}
+
+			$release = self::get_release( $variation );
+
+			if ( $release && ( ! $nearest || $release < $nearest_release ) ) {
+				$nearest         = $variation;
+				$nearest_release = $release;
+			}
+		}
+
+		return $nearest ? $nearest : $fallback;
+	}
+
+	/**
 	 * Removes all pre-order meta from a product or variation and persists it.
 	 * Called once the release date has passed, either lazily (get_state) or
 	 * from the daily cron event (PDW_Cron).

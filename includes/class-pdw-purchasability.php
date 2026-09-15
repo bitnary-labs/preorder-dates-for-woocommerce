@@ -35,6 +35,18 @@ class PDW_Purchasability {
 		// not clash with our own "Pre-order..." label.
 		add_filter( 'woocommerce_get_availability', array( __CLASS__, 'filter_availability' ), 20, 2 );
 
+		// The variation form's per-variation JSON (read by wc-add-to-cart-variation.js
+		// on 'found_variation'/'reset_data') is built by
+		// WC_Product_Variable::get_available_variation(), independently from the
+		// filters above: its 'availability_html' key comes from wc_get_stock_html(
+		// $variation ), and the parent's own add-to-cart form always renders (it is
+		// purchasable even when a variation is not), so the variation's real
+		// stock/availability text would otherwise leak through once selected. This
+		// filter replaces it with our own label/closed message and adds a custom
+		// field with the button text for our own small enqueued script to apply.
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/class-wc-product-variable.php
+		add_filter( 'woocommerce_available_variation', array( __CLASS__, 'filter_available_variation' ), 20, 3 );
+
 		// Classic (non-block) add-to-cart validation.
 		// Signature confirmed from WC_Form_Handler::add_to_cart_handler_variable()
 		// and WC_AJAX::add_to_cart(): ( $passed, $product_id, $quantity, $variation_id, $variations ).
@@ -95,6 +107,25 @@ class PDW_Purchasability {
 			);
 		}
 		return $availability;
+	}
+
+	/**
+	 * @param array                $data      Variation data sent to the front-end script.
+	 * @param WC_Product_Variable  $product   Parent variable product (unused).
+	 * @param WC_Product_Variation $variation Variation.
+	 * @return array
+	 */
+	public static function filter_available_variation( $data, $product, $variation ) {
+		$state = PDW_Data::get_state( $variation );
+
+		if ( 'open' === $state ) {
+			$data['availability_html'] = '<p class="pdw-preorder-label">' . esc_html( PDW_Settings::get_open_label( $variation ) ) . '</p>';
+			$data['pdw_button_text']   = PDW_Settings::get_button_text();
+		} elseif ( 'closed' === $state ) {
+			$data['availability_html'] = '<p class="pdw-preorder-label pdw-preorder-closed">' . esc_html( PDW_Settings::get_closed_text() ) . '</p>';
+		}
+
+		return $data;
 	}
 
 	/**

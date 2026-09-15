@@ -22,6 +22,13 @@ class PDW_Frontend {
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'render_label' ), 25 );
 		add_action( 'woocommerce_after_shop_loop_item_title', array( __CLASS__, 'render_label' ), 5 );
 
+		// Only on a variable product's own page: swaps the add-to-cart button
+		// text to match the pre-order state of the variation currently selected.
+		// wc-add-to-cart-variation.js (the script that fires 'found_variation'/
+		// 'reset_data') does not touch button text itself, only CSS classes.
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/client/legacy/js/frontend/add-to-cart-variation.js
+		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_variation_script' ) );
+
 		add_filter( 'woocommerce_product_single_add_to_cart_text', array( __CLASS__, 'button_text' ), 10, 2 );
 		add_filter( 'woocommerce_product_add_to_cart_text', array( __CLASS__, 'button_text' ), 10, 2 );
 
@@ -36,11 +43,28 @@ class PDW_Frontend {
 	/**
 	 * Outputs the pre-order label (open) or the closed message, for whichever
 	 * product is currently in scope (single product page or loop item).
+	 *
+	 * A variable product only ever carries pre-order meta on its variations,
+	 * never on itself, so it is summarized here using whichever variation is
+	 * open for pre-order and ships soonest (see PDW_Data::get_nearest_open_variation()).
+	 * A variation-specific label/closed message is also shown once a shopper
+	 * picks a variation on the product page, via filter_available_variation()
+	 * in PDW_Purchasability and the enqueued button-text script below.
 	 */
 	public static function render_label() {
 		global $product;
 
 		if ( ! $product instanceof WC_Product ) {
+			return;
+		}
+
+		if ( $product instanceof WC_Product_Variable ) {
+			$variation = PDW_Data::get_nearest_open_variation( $product );
+
+			if ( $variation ) {
+				echo '<p class="pdw-preorder-label">' . esc_html( PDW_Settings::get_open_label( $variation ) ) . '</p>';
+			}
+
 			return;
 		}
 
@@ -51,6 +75,31 @@ class PDW_Frontend {
 		} elseif ( 'closed' === $state ) {
 			echo '<p class="pdw-preorder-label pdw-preorder-closed">' . esc_html( PDW_Settings::get_closed_text() ) . '</p>';
 		}
+	}
+
+	/**
+	 * Enqueues the button-text swap script, only on a variable product's own
+	 * page (it is a no-op everywhere else, including simple products, whose
+	 * button text is already handled server-side by button_text() above).
+	 */
+	public static function enqueue_variation_script() {
+		if ( ! function_exists( 'is_product' ) || ! is_product() ) {
+			return;
+		}
+
+		$product = wc_get_product( get_queried_object_id() );
+
+		if ( ! $product instanceof WC_Product_Variable ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'pdw-variation',
+			PDW_PLUGIN_URL . 'assets/js/variation.js',
+			array( 'jquery', 'wc-add-to-cart-variation' ),
+			PDW_VERSION,
+			true
+		);
 	}
 
 	/**

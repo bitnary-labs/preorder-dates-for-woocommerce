@@ -1,0 +1,133 @@
+<?php
+/**
+ * Makes pre-order products purchasable before the cutoff (regardless of
+ * normal stock rules) and blocks them afterwards, everywhere WooCommerce
+ * checks purchasability: classic templates, classic add-to-cart, and the
+ * Store API used by the cart/checkout blocks.
+ *
+ * @package PreorderDatesForWooCommerce
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+class PDW_Purchasability {
+
+	/**
+	 * Registers hooks.
+	 */
+	public static function init() {
+		// WC_Product::is_purchasable() applies 'woocommerce_is_purchasable'; for a
+		// variation, its is_purchasable() calls parent::is_purchasable() first (so
+		// this same filter fires with the variation as $product) and then applies
+		// 'woocommerce_variation_is_purchasable' on top, so one callback on both
+		// covers simple products and variations alike.
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/abstracts/abstract-wc-product.php
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/class-wc-product-variation.php
+		add_filter( 'woocommerce_is_purchasable', array( __CLASS__, 'filter_purchasable' ), 20, 2 );
+		add_filter( 'woocommerce_variation_is_purchasable', array( __CLASS__, 'filter_purchasable' ), 20, 2 );
+
+		// Forces "in stock" while pre-order is open so the add-to-cart form
+		// renders regardless of the product's real stock status/quantity.
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/abstracts/abstract-wc-product.php
+		add_filter( 'woocommerce_product_is_in_stock', array( __CLASS__, 'filter_in_stock' ), 20, 2 );
+
+		// Hides the default stock badge/text while pre-order is open so it does
+		// not clash with our own "Pre-order..." label.
+		add_filter( 'woocommerce_get_availability', array( __CLASS__, 'filter_availability' ), 20, 2 );
+
+		// Classic (non-block) add-to-cart validation.
+		// Signature confirmed from WC_Form_Handler::add_to_cart_handler_variable()
+		// and WC_AJAX::add_to_cart(): ( $passed, $product_id, $quantity, $variation_id, $variations ).
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/class-wc-form-handler.php
+		add_filter( 'woocommerce_add_to_cart_validation', array( __CLASS__, 'validate_add_to_cart' ), 10, 5 );
+
+		// Store API (cart/checkout blocks) add-to-cart validation. is_purchasable()
+		// is already checked by Automattic\WooCommerce\StoreApi\Utilities\CartController::validate_add_to_cart(),
+		// which is enough to block the request; this hook only replaces the
+		// generic WooCommerce message with our own "Pre-orders closed" text.
+		// @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/src/StoreApi/Utilities/CartController.php
+		if ( class_exists( '\Automattic\WooCommerce\StoreApi\Exceptions\RouteException' ) ) {
+			add_action( 'woocommerce_store_api_validate_add_to_cart', array( __CLASS__, 'validate_store_api_add_to_cart' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * @param bool       $purchasable Current purchasable state.
+	 * @param WC_Product $product     Product or variation.
+	 * @return bool
+	 */
+	public static function filter_purchasable( $purchasable, $product ) {
+		$state = PDW_Data::get_state( $product );
+
+		if ( 'open' === $state ) {
+			return true;
+		}
+
+		if ( 'closed' === $state ) {
+			return false;
+		}
+
+		return $purchasable;
+	}
+
+	/**
+	 * @param bool       $in_stock Current in-stock state.
+	 * @param WC_Product $product  Product or variation.
+	 * @return bool
+	 */
+	public static function filter_in_stock( $in_stock, $product ) {
+		if ( 'open' === PDW_Data::get_state( $product ) ) {
+			return true;
+		}
+		return $in_stock;
+	}
+
+	/**
+	 * @param array      $availability Array with 'availability' (text) and 'class' keys.
+	 * @param WC_Product $product      Product or variation.
+	 * @return array
+	 */
+	public static function filter_availability( $availability, $product ) {
+		if ( 'open' === PDW_Data::get_state( $product ) ) {
+			return array(
+				'availability' => '',
+				'class'        => '',
+			);
+		}
+		return $availability;
+	}
+
+	/**
+	 * @param bool     $passed       Whether validation has passed so far.
+	 * @param int      $product_id   Product ID being added.
+	 * @param int      $quantity     Quantity requested.
+	 * @param int|null $variation_id Variation ID, when applicable.
+	 * @return bool
+	 */
+	public static function validate_add_to_cart( $passed, $product_id, $quantity, $variation_id = 0 ) {
+		$product = wc_get_product( $variation_id ? $variation_id : $product_id );
+
+		if ( $product && 'closed' === PDW_Data::get_state( $product ) ) {
+			wc_add_notice( PDW_Settings::get_closed_text(), 'error' );
+			return false;
+		}
+
+		return $passed;
+	}
+
+	/**
+	 * @param WC_Product      $product Product or variation being added via the Store API.
+	 * @param WP_REST_Request $request Store API request.
+	 *
+	 * @throws \Automattic\WooCommerce\StoreApi\Exceptions\RouteException When pre-order is closed.
+	 */
+	public static function validate_store_api_add_to_cart( $product, $request ) {
+		if ( 'closed' === PDW_Data::get_state( $product ) ) {
+			throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
+				'preorder_dates_for_woocommerce_closed',
+				esc_html( PDW_Settings::get_closed_text() ),
+				400
+			);
+		}
+	}
+}

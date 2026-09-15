@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -115,12 +115,24 @@ timezone (`wp_timezone()`).
 
 == Changelog ==
 
+= 0.1.1 =
+* Fix: a variable product's variations did not show the pre-order label/closed message or
+  swap the add-to-cart button text when selected; the variation dropdown now carries its own
+  availability text and button text, applied by a small enqueued script.
+* Fix: a variation past its order cutoff showed the generic "Out of stock" text instead of the
+  configured closed message.
+* Fix: a variable product showed no pre-order indication in shop listings; it now shows the
+  label of whichever variation is open for pre-order and ships soonest.
+
 = 0.1.0 =
 * First release: pre-order toggle with cutoff and release dates for simple products and
   variations, purchasability rules, front-end label and button text, cart/checkout/order line
   item, settings page, HPOS and cart/checkout blocks compatibility.
 
 == Upgrade Notice ==
+
+= 0.1.1 =
+Fixes variation pre-order label/button text and shop listing indication for variable products.
 
 = 0.1.0 =
 First release.

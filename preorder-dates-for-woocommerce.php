@@ -3,7 +3,7 @@
  * Plugin Name:       Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.6
  * Tested up to:      7.1
  * Requires PHP:      8.1
@@ -19,7 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PDW_VERSION', '0.1.0' );
+define( 'PDW_VERSION', '0.1.1' );
 define( 'PDW_PLUGIN_FILE', __FILE__ );
 define( 'PDW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PDW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

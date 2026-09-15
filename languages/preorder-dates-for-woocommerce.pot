@@ -1,0 +1,144 @@
+# Copyright (C) 2026 Davi Souto
+# This file is distributed under the GPLv2 or later license, same as Preorder Dates for WooCommerce itself.
+msgid ""
+msgstr ""
+"Project-Id-Version: Preorder Dates for WooCommerce 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/preorder-dates-for-woocommerce\n"
+"POT-Creation-Date: 2026-09-14 22:00-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: preorder-dates-for-woocommerce\n"
+
+#: preorder-dates-for-woocommerce.php:61
+msgid ""
+"Preorder Dates for WooCommerce requires WooCommerce to be installed and "
+"active."
+msgstr ""
+
+#: includes/class-pdw-order-meta.php:54 includes/class-pdw-frontend.php:85
+msgid "Ships on"
+msgstr ""
+
+#: includes/class-pdw-settings.php:42 includes/class-pdw-settings.php:60
+msgid "Pre-order dates"
+msgstr ""
+
+#: includes/class-pdw-settings.php:63
+msgid ""
+"Text shown on the product page, shop listings, the cart and checkout for "
+"products in pre-order."
+msgstr ""
+
+#: includes/class-pdw-settings.php:66
+msgid "Label"
+msgstr ""
+
+#: includes/class-pdw-settings.php:67
+msgid ""
+"Shown on the product page and in shop listings while pre-order is open. "
+"Placeholders: {release_date}, {cutoff_date}."
+msgstr ""
+
+#: includes/class-pdw-settings.php:75
+msgid "Button text"
+msgstr ""
+
+#: includes/class-pdw-settings.php:76
+msgid "Replaces \"Add to cart\" while pre-order is open."
+msgstr ""
+
+#: includes/class-pdw-settings.php:79 includes/class-pdw-settings.php:167
+#: includes/class-pdw-product-fields.php:33
+msgid "Pre-order"
+msgstr ""
+
+#: includes/class-pdw-settings.php:82
+msgid "Closed message"
+msgstr ""
+
+#: includes/class-pdw-settings.php:83
+msgid ""
+"Shown once the order cutoff has passed and the product can no longer be "
+"bought."
+msgstr ""
+
+#: includes/class-pdw-settings.php:86 includes/class-pdw-settings.php:174
+msgid "Pre-orders closed"
+msgstr ""
+
+#: includes/class-pdw-settings.php:89
+msgid "Date format"
+msgstr ""
+
+#: includes/class-pdw-settings.php:90
+msgid ""
+"PHP date format used for {release_date} and {cutoff_date}. Leave as-is to "
+"match Settings > General > Date Format."
+msgstr ""
+
+#: includes/class-pdw-settings.php:100
+msgid "Pro"
+msgstr ""
+
+#: includes/class-pdw-settings.php:121
+msgid "Block or split mixed carts (pre-order and in-stock items together)"
+msgstr ""
+
+#: includes/class-pdw-settings.php:122
+msgid "Custom pre-order confirmation emails and a release countdown"
+msgstr ""
+
+#: includes/class-pdw-settings.php:123
+msgid "Bulk edit pre-order dates across many products at once"
+msgstr ""
+
+#: includes/class-pdw-settings.php:124
+msgid "Priority support"
+msgstr ""
+
+#: includes/class-pdw-settings.php:127
+msgid ""
+"The free plugin above is the whole feature set for pre-order dates. The paid "
+"version adds:"
+msgstr ""
+
+#: includes/class-pdw-settings.php:131
+msgid "Learn more"
+msgstr ""
+
+#: includes/class-pdw-settings.php:140
+msgid "Pre-order. Ships on {release_date}. Orders close {cutoff_date}."
+msgstr ""
+
+#: includes/views/variation-panel.php:18
+msgid "Enable pre-order for this variation"
+msgstr ""
+
+#: includes/views/variation-panel.php:22 includes/views/product-panel.php:20
+msgid "Orders close (cutoff)"
+msgstr ""
+
+#: includes/views/variation-panel.php:26 includes/views/product-panel.php:25
+msgid "Release / ships on"
+msgstr ""
+
+#: includes/views/product-panel.php:16
+msgid "Enable pre-order"
+msgstr ""
+
+#: includes/views/product-panel.php:22
+msgid ""
+"After this date and time, the product stops being purchasable. Store "
+"timezone."
+msgstr ""
+
+#: includes/views/product-panel.php:27
+msgid ""
+"Once this date and time passes, pre-order is cleared automatically and the "
+"product behaves normally again. Store timezone."
+msgstr ""

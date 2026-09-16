@@ -83,6 +83,13 @@ function pdw_bootstrap() {
 	PDW_Cron::init();
 	PDW_Admin_Page::init();
 
+	// The paid build of this plugin ships an extra pro/ folder next to these
+	// files. It is absent from the version on WordPress.org, so this does
+	// nothing there.
+	if ( is_readable( PDW_PLUGIN_DIR . 'pro/load.php' ) ) {
+		require_once PDW_PLUGIN_DIR . 'pro/load.php';
+	}
+
 	/**
 	 * Fires once every class of the free plugin is loaded and hooked.
 	 *

@@ -55,7 +55,7 @@ class PDW_Variation_Fields {
 	 * @param int $loop         Position of the variation in the form.
 	 */
 	public static function save( $variation_id, $loop ) {
-		if ( empty( $_POST['security'] ) || ! wp_verify_nonce( wp_unslash( $_POST['security'] ), 'save-variations' ) ) {
+		if ( empty( $_POST['security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'save-variations' ) ) {
 			return;
 		}
 

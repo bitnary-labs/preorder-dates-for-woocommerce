@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,6 +114,11 @@ timezone (`wp_timezone()`).
 4. Settings under WooCommerce > Settings > Products > Pre-order dates.
 
 == Changelog ==
+
+= 0.1.2 =
+* Fix: the two nonce values read on save are now sanitized before they are verified.
+* Change: dropped the manual translation loader. WordPress.org loads translations on its own
+  since WordPress 4.6, so the call was doing nothing.
 
 = 0.1.1 =
 * Fix: a variable product's variations did not show the pre-order label/closed message or

@@ -7,6 +7,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Everything the shopper sees: the pre-order label, the button text, and the
+ * release date line in the cart and checkout.
+ */
 class PDW_Frontend {
 
 	/**
@@ -103,6 +107,8 @@ class PDW_Frontend {
 	}
 
 	/**
+	 * Swaps "Add to cart" for the configured pre-order button text.
+	 *
 	 * @param string          $text    Default button text.
 	 * @param WC_Product|null $product Product being rendered, when provided.
 	 * @return string
@@ -120,6 +126,8 @@ class PDW_Frontend {
 	}
 
 	/**
+	 * Adds the release date as a line under the item in the cart and checkout.
+	 *
 	 * @param array $item_data Existing cart item data lines.
 	 * @param array $cart_item Cart item, with a 'data' key holding the WC_Product.
 	 * @return array

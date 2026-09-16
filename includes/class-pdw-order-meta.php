@@ -8,6 +8,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Copies the release date onto the order line item, so it survives on the order
+ * after the product itself goes back to normal.
+ */
 class PDW_Order_Meta {
 
 	/**
@@ -28,12 +32,14 @@ class PDW_Order_Meta {
 	}
 
 	/**
+	 * Stores the release date on the line item as it is created.
+	 *
 	 * @param WC_Order_Item_Product $item          Order line item being created.
 	 * @param string                $cart_item_key Cart item key.
 	 * @param array                 $values         Cart item values, including 'data' (WC_Product).
 	 * @param WC_Order              $order          Order being created.
 	 */
-	public static function add_line_item_meta( $item, $cart_item_key, $values, $order ) {
+	public static function add_line_item_meta( $item, $cart_item_key, $values, $order ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $order is part of the woocommerce_checkout_create_order_line_item signature.
 		$product = isset( $values['data'] ) ? $values['data'] : null;
 
 		if ( ! $product instanceof WC_Product || 'open' !== PDW_Data::get_state( $product ) ) {

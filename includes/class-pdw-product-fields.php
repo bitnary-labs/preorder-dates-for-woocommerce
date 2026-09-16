@@ -25,6 +25,8 @@ class PDW_Product_Fields {
 	}
 
 	/**
+	 * Adds the Pre-order tab to the product data panel.
+	 *
 	 * @param array $tabs Existing product data tabs.
 	 * @return array
 	 */

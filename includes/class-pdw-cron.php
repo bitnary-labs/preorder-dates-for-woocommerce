@@ -9,6 +9,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Daily cleanup of pre-order data whose release date has passed.
+ */
 class PDW_Cron {
 
 	/**
@@ -27,6 +30,8 @@ class PDW_Cron {
 	}
 
 	/**
+	 * Clears expired pre-order rows for one post type.
+	 *
 	 * @param string $post_type 'product' or 'product_variation'.
 	 */
 	private static function cleanup_post_type( $post_type ) {

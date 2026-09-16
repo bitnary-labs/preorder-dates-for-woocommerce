@@ -26,6 +26,8 @@ class PDW_Variation_Fields {
 	}
 
 	/**
+	 * Renders the pre-order fields inside one variation row.
+	 *
 	 * @param int     $loop           Position of the variation in the form.
 	 * @param array   $variation_data Variation form data (unused; read from the product instead).
 	 * @param WP_Post $variation      Variation post object.

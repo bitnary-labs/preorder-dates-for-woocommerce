@@ -55,7 +55,7 @@ class PDW_Settings {
 			return $settings;
 		}
 
-		return array(
+		$fields = array(
 			array(
 				'title' => __( 'Pre-order dates', 'preorder-dates-for-woocommerce' ),
 				'type'  => 'title',
@@ -107,6 +107,18 @@ class PDW_Settings {
 				'id'   => 'pdw_pro_options',
 			),
 		);
+
+		/**
+		 * Filters the fields shown in the Pre-order dates settings section.
+		 *
+		 * The Pro add-on uses this to drop its own fields in and to remove the
+		 * upgrade box, instead of re-checking the current section itself.
+		 *
+		 * @since 0.2.0
+		 *
+		 * @param array $fields WooCommerce settings field definitions.
+		 */
+		return apply_filters( 'pdw_settings_fields', $fields );
 	}
 
 	/**
@@ -118,13 +130,13 @@ class PDW_Settings {
 	 */
 	private static function pro_description() {
 		$items = array(
-			__( 'Block or split mixed carts (pre-order and in-stock items together)', 'preorder-dates-for-woocommerce' ),
-			__( 'Custom pre-order confirmation emails and a release countdown', 'preorder-dates-for-woocommerce' ),
+			__( 'Warn about or block carts that mix pre-order and in-stock items', 'preorder-dates-for-woocommerce' ),
+			__( 'A reminder email sent a few days before the release date', 'preorder-dates-for-woocommerce' ),
 			__( 'Bulk edit pre-order dates across many products at once', 'preorder-dates-for-woocommerce' ),
 			__( 'Priority support', 'preorder-dates-for-woocommerce' ),
 		);
 
-		$html  = '<p>' . esc_html__( 'The free plugin above is the whole feature set for pre-order dates. The paid version adds:', 'preorder-dates-for-woocommerce' ) . '</p><ul style="list-style: disc; margin-left: 1.5em;">';
+		$html = '<p>' . esc_html__( 'The free plugin above is the whole feature set for pre-order dates. The paid version adds:', 'preorder-dates-for-woocommerce' ) . '</p><ul style="list-style: disc; margin-left: 1.5em;">';
 		foreach ( $items as $item ) {
 			$html .= '<li>' . esc_html( $item ) . '</li>';
 		}
@@ -134,6 +146,8 @@ class PDW_Settings {
 	}
 
 	/**
+	 * The label used when the store has not customized it.
+	 *
 	 * @return string
 	 */
 	private static function default_label() {
@@ -161,6 +175,8 @@ class PDW_Settings {
 	}
 
 	/**
+	 * The add-to-cart button text for a product open for pre-order.
+	 *
 	 * @return string
 	 */
 	public static function get_button_text() {
@@ -168,6 +184,8 @@ class PDW_Settings {
 	}
 
 	/**
+	 * The message shown once the cutoff has passed.
+	 *
 	 * @return string
 	 */
 	public static function get_closed_text() {

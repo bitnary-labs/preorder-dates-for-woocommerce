@@ -30,6 +30,8 @@ class PDW_Data {
 	}
 
 	/**
+	 * Reads the cutoff date, the moment the store stops taking orders.
+	 *
 	 * @param WC_Product $product Product or variation.
 	 * @return int GMT timestamp, or 0 when unset.
 	 */
@@ -39,6 +41,8 @@ class PDW_Data {
 	}
 
 	/**
+	 * Reads the release date, the moment the product ships and pre-order ends.
+	 *
 	 * @param WC_Product $product Product or variation.
 	 * @return int GMT timestamp, or 0 when unset.
 	 */

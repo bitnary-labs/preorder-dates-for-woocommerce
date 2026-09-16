@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.1.2
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,8 +114,18 @@ timezone (`wp_timezone()`).
 4. Block-based cart showing the Ships on date under a pre-order item.
 5. The closed message on a product whose cutoff has passed.
 6. Settings under WooCommerce > Settings > Products > Pre-order dates.
+7. The Pre-orders screen under the WooCommerce menu.
 
 == Changelog ==
+
+= 0.2.0 =
+* New: a "Pre-orders" screen under the WooCommerce menu, listing every product
+  and variation taking orders or waiting for its release, ordered by whichever
+  date comes next.
+* New: the settings screen lists what the paid version adds. Two of those lines
+  were reworded to match what it will actually do.
+* Dev: unit tests and a `pdw_loaded` action, so the paid add-on has a stable
+  place to hook into.
 
 = 0.1.2 =
 * Fix: the two nonce values read on save are now sanitized before they are verified.

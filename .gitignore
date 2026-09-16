@@ -3,3 +3,6 @@
 /languages/*.mo
 node_modules/
 dist/
+vendor/
+.phpunit.result.cache
+.phpunit.cache/

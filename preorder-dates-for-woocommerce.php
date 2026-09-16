@@ -3,7 +3,7 @@
  * Plugin Name:       Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
- * Version:           0.1.2
+ * Version:           0.2.0
  * Requires at least: 6.6
  * Tested up to:      7.1
  * Requires PHP:      8.1
@@ -15,11 +15,13 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       preorder-dates-for-woocommerce
  * Domain Path:       /languages
+ *
+ * @package PreorderDatesForWooCommerce
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PDW_VERSION', '0.1.2' );
+define( 'PDW_VERSION', '0.2.0' );
 define( 'PDW_PLUGIN_FILE', __FILE__ );
 define( 'PDW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PDW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -70,6 +72,7 @@ function pdw_bootstrap() {
 	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-frontend.php';
 	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-order-meta.php';
 	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-cron.php';
+	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-admin-page.php';
 
 	PDW_Settings::init();
 	PDW_Product_Fields::init();
@@ -78,4 +81,16 @@ function pdw_bootstrap() {
 	PDW_Frontend::init();
 	PDW_Order_Meta::init();
 	PDW_Cron::init();
+	PDW_Admin_Page::init();
+
+	/**
+	 * Fires once every class of the free plugin is loaded and hooked.
+	 *
+	 * This is the extension point the Pro add-on waits on. It runs inside
+	 * 'plugins_loaded', so anything hooking it is still early enough to
+	 * register its own filters on WooCommerce.
+	 *
+	 * @since 0.2.0
+	 */
+	do_action( 'pdw_loaded' );
 }

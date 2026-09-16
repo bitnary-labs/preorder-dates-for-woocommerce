@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ruleset name="Preorder Dates for WooCommerce">
+    <description>WordPress coding standards, with the checks that do not apply to this plugin turned off.</description>
+
+    <file>.</file>
+    <exclude-pattern>/vendor/*</exclude-pattern>
+    <exclude-pattern>/dist/*</exclude-pattern>
+    <exclude-pattern>/tests/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="WordPress">
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+        <!--
+            Several comments are a bare "@see <url>" pointing at the WooCommerce
+            source a filter comes from. A full stop glued to the end of a link
+            breaks copy and paste, so this punctuation rule is off.
+        -->
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+    </rule>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="preorder-dates-for-woocommerce"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- Capabilities that WooCommerce registers, which WPCS does not know about. -->
+    <rule ref="WordPress.WP.Capabilities">
+        <properties>
+            <property name="custom_capabilities" type="array">
+                <element value="manage_woocommerce"/>
+                <element value="edit_product"/>
+            </property>
+        </properties>
+    </rule>
+
+    <config name="minimum_wp_version" value="6.6"/>
+    <config name="testVersion" value="8.1-"/>
+    <rule ref="PHPCompatibilityWP"/>
+</ruleset>

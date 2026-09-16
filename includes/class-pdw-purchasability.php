@@ -10,6 +10,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Decides whether a product on pre-order can be bought, on every path
+ * WooCommerce asks: the product page, the classic cart, and the Store API that
+ * the cart and checkout blocks use.
+ */
 class PDW_Purchasability {
 
 	/**
@@ -64,6 +69,8 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Lets an open pre-order be bought, and blocks a closed one.
+	 *
 	 * @param bool       $purchasable Current purchasable state.
 	 * @param WC_Product $product     Product or variation.
 	 * @return bool
@@ -83,6 +90,8 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Reports an open pre-order as in stock, whatever the stock settings say.
+	 *
 	 * @param bool       $in_stock Current in-stock state.
 	 * @param WC_Product $product  Product or variation.
 	 * @return bool
@@ -95,6 +104,8 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Replaces the availability text with the pre-order label or closed message.
+	 *
 	 * @param array      $availability Array with 'availability' (text) and 'class' keys.
 	 * @param WC_Product $product      Product or variation.
 	 * @return array
@@ -110,6 +121,8 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Carries the label and button text for one variation to the front end.
+	 *
 	 * @param array                $data      Variation data sent to the front-end script.
 	 * @param WC_Product_Variable  $product   Parent variable product (unused).
 	 * @param WC_Product_Variation $variation Variation.
@@ -129,6 +142,8 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Stops a closed pre-order from being added to the classic cart.
+	 *
 	 * @param bool     $passed       Whether validation has passed so far.
 	 * @param int      $product_id   Product ID being added.
 	 * @param int      $quantity     Quantity requested.
@@ -147,12 +162,14 @@ class PDW_Purchasability {
 	}
 
 	/**
+	 * Stops a closed pre-order from being added through the Store API.
+	 *
 	 * @param WC_Product      $product Product or variation being added via the Store API.
 	 * @param WP_REST_Request $request Store API request.
 	 *
 	 * @throws \Automattic\WooCommerce\StoreApi\Exceptions\RouteException When pre-order is closed.
 	 */
-	public static function validate_store_api_add_to_cart( $product, $request ) {
+	public static function validate_store_api_add_to_cart( $product, $request ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $request is part of the woocommerce_store_api_validate_add_to_cart signature.
 		if ( 'closed' === PDW_Data::get_state( $product ) ) {
 			throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
 				'preorder_dates_for_woocommerce_closed',

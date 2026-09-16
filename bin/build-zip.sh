@@ -23,5 +23,7 @@ rm -f "$zipfile"
        "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/.phpcs.xml.dist" \
        "*/.phpunit.result.cache" "*/README.md" "*/.DS_Store" )
 
+# Only the path goes to stdout, so a caller can do "zip=$(build.sh)" without
+# the summary below breaking the pipe under "set -o pipefail".
+unzip -l "$zipfile" | tail -3 >&2
 echo "$zipfile"
-unzip -l "$zipfile" | tail -3

@@ -18,7 +18,7 @@ fi
 zipfile="$out/$slug-$version.zip"
 rm -f "$zipfile"
 ( cd "$here/.." && zip -rq "$zipfile" "$slug" \
-    -x "*/.git/*" "*/.github/*" "*/.gitignore" "*/.wordpress-org/*" \
+    -x "*/.git/*" "*/.github/*" "*/.gitignore" "*/.wordpress-org/*" "*/pro/*" \
        "*/bin/*" "*/dist/*" "*/tests/*" "*/vendor/*" \
        "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/.phpcs.xml.dist" \
        "*/.phpunit.result.cache" "*/README.md" "*/.DS_Store" )

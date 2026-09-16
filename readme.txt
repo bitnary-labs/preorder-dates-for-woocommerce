@@ -110,8 +110,10 @@ timezone (`wp_timezone()`).
 
 1. Pre-order tab on a simple product, with the cutoff and release fields.
 2. Pre-order fields on a variation, inside the Variations tab.
-3. Pre-order label and button on the product page.
-4. Settings under WooCommerce > Settings > Products > Pre-order dates.
+3. Pre-order label, release date and Pre-order button on the product page.
+4. Block-based cart showing the Ships on date under a pre-order item.
+5. The closed message on a product whose cutoff has passed.
+6. Settings under WooCommerce > Settings > Products > Pre-order dates.
 
 == Changelog ==
 

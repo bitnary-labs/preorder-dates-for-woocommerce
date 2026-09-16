@@ -62,9 +62,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Check the zip that would be submitted, not the repository. The two
+      # differ: the repository carries tests, CI config and a build script,
+      # none of which the directory accepts, and none of which ship.
+      - name: Build the distributable
+        run: |
+          set -euo pipefail
+          bin/build-zip.sh "$RUNNER_TEMP/dist" > /dev/null
+          mkdir -p "$RUNNER_TEMP/plugin"
+          unzip -q "$RUNNER_TEMP"/dist/*.zip -d "$RUNNER_TEMP/plugin"
+
       - name: Run the official Plugin Check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: '.'
-          exclude-directories: 'tests,vendor,bin,dist,.wordpress-org'
-          exclude-files: '.gitignore'
+          build-dir: ${{ runner.temp }}/plugin/preorder-dates-for-woocommerce

@@ -1,5 +1,5 @@
 === Preorder Dates for WooCommerce ===
-Contributors: davisouto
+Contributors: dvsouto
 Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1

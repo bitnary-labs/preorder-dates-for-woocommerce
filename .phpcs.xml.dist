@@ -4,6 +4,8 @@
 
     <file>.</file>
     <exclude-pattern>/vendor/*</exclude-pattern>
+    <!-- Third party, shipped as published by Freemius. Not ours to restyle. -->
+    <exclude-pattern>/freemius/*</exclude-pattern>
     <exclude-pattern>/dist/*</exclude-pattern>
     <exclude-pattern>/tests/*</exclude-pattern>
 

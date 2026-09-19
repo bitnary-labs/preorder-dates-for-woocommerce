@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,12 @@ timezone (`wp_timezone()`).
 7. The Pre-orders screen under the WooCommerce menu.
 
 == Changelog ==
+
+= 0.3.0 =
+* New: licensing, the account screen and the upgrade path now run on the Freemius
+  SDK, which is also what lets the paid build update itself. On WordPress.org the
+  SDK runs in its compliant mode and collects nothing without opt-in.
+* Note: this makes the download larger. The SDK is around four megabytes.
 
 = 0.2.0 =
 * New: a "Pre-orders" screen under the WooCommerce menu, listing every product

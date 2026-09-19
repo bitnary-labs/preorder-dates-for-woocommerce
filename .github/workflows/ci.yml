@@ -76,3 +76,5 @@ jobs:
         uses: wordpress/plugin-check-action@v1
         with:
           build-dir: ${{ runner.temp }}/plugin/preorder-dates-for-woocommerce
+          # The Freemius SDK ships as published. Reviewing it is Freemius' job.
+          exclude-directories: 'freemius'

@@ -17,7 +17,9 @@ defined( 'ABSPATH' ) || exit;
  */
 class PDW_Admin_Page {
 
-	const MENU_SLUG = 'preorder-dates';
+	// Defined in the main plugin file, because Freemius needs it before this
+	// class is loaded in order to hang its Account and Upgrade screens here.
+	const MENU_SLUG = PDW_MENU_SLUG;
 
 	/**
 	 * Registers hooks.

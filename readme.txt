@@ -41,12 +41,23 @@ What the free version does:
   blocks, and saved on the order so it shows up in the order admin screen and in WooCommerce's
   order emails.
 * Editable text and date format under WooCommerce > Settings > Products > Pre-order dates.
+* A Pre-orders screen under the WooCommerce menu listing every product and variation taking
+  orders or waiting to ship, ordered by whichever date comes next.
 * Declared compatible with High-Performance Order Storage (HPOS) and with the cart/checkout
   blocks.
 
-What the free version does not do (see the FAQ): it does not block or split a cart that mixes
-pre-order and in-stock items, it does not send a separate pre-order confirmation email or a
-release countdown, and it has no bulk edit across products.
+What the free version does not do (see the FAQ): it does not warn about or block a cart that
+mixes pre-order and in-stock items, it does not email the customer before the release date, and
+it has no way to move the dates of many products at once.
+
+= Third-party service: Freemius =
+
+This plugin includes the Freemius SDK, which handles licensing, the account screen and updates
+for the paid version. On first use it asks whether you want to opt in to update notices and to
+share basic information about your WordPress environment. If you skip, nothing is sent and the
+plugin keeps working in full. If you opt in, that information goes to Freemius, Inc. under
+their terms (https://freemius.com/terms/) and privacy policy (https://freemius.com/privacy/).
+The free version makes no other external requests.
 
 == Installation ==
 
@@ -86,9 +97,9 @@ loaded in the admin, queried) or, at the latest, the next time the daily cleanup
 = What does the free version not do? =
 
 It does not stop a customer from adding a pre-order item and an in-stock item to the same cart,
-it does not send a dedicated pre-order confirmation email or a countdown to release, and it has
-no way to edit pre-order dates on more than one product at a time. All three are part of the
-paid version.
+it does not email the customer a few days before the release date, and it has no way to move the
+pre-order dates of many products at once. All three are part of the paid version, which can warn
+about a mixed cart or block checkout until it is split, but does not split it into two orders.
 
 = Does this work with High-Performance Order Storage (HPOS) and the cart/checkout blocks? =
 

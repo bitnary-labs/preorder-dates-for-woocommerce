@@ -1,4 +1,4 @@
-# Preorder Dates for WooCommerce
+# Bitnary Preorder Dates for WooCommerce
 
 Sell on pre-order with two dates: when orders close and when the release ships.
 

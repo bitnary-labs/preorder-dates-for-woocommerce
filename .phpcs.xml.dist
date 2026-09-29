@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Preorder Dates for WooCommerce">
+<ruleset name="Bitnary Preorder Dates for WooCommerce">
     <description>WordPress coding standards, with the checks that do not apply to this plugin turned off.</description>
 
     <file>.</file>
@@ -26,7 +26,7 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <property name="text_domain" type="array">
-                <element value="preorder-dates-for-woocommerce"/>
+                <element value="bitnary-preorder-dates-for-woocommerce"/>
             </property>
         </properties>
     </rule>

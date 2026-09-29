@@ -1,4 +1,4 @@
-=== Preorder Dates for WooCommerce ===
+=== Bitnary Preorder Dates for WooCommerce ===
 Contributors: dvsouto
 Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
@@ -12,7 +12,7 @@ Sell on pre-order with two dates: when orders close and when the release ships.
 
 == Description ==
 
-Preorder Dates for WooCommerce adds a pre-order mode to simple products and to individual
+Bitnary Preorder Dates for WooCommerce adds a pre-order mode to simple products and to individual
 product variations, with two independent dates: the cutoff (when the store stops accepting
 orders) and the release (when the product ships or becomes available).
 
@@ -61,7 +61,7 @@ The free version makes no other external requests.
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/preorder-dates-for-woocommerce`, or install
+1. Upload the plugin files to `/wp-content/plugins/bitnary-preorder-dates-for-woocommerce`, or install
    it through the WordPress plugins screen.
 2. Activate the plugin. WooCommerce must already be installed and active.
 3. Edit a simple product and open the "Pre-order" tab in the Product data box, or edit a
@@ -142,6 +142,8 @@ timezone (`wp_timezone()`).
   Settings and product dates saved by earlier versions are moved over once, on
   the first load after updating. Code hooking `pdw_loaded` should hook
   `pdfw_loaded` now.
+* Change: renamed to Bitnary Preorder Dates for WooCommerce. The plugin folder
+  and text domain are now `bitnary-preorder-dates-for-woocommerce`.
 
 = 0.3.0 =
 * New: licensing, the account screen and the upgrade path now run on the Freemius

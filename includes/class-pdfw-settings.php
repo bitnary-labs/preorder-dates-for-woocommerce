@@ -39,7 +39,7 @@ class PDFW_Settings {
 	 * @return array
 	 */
 	public static function add_section( $sections ) {
-		$sections[ self::SECTION_ID ] = __( 'Pre-order dates', 'preorder-dates-for-woocommerce' );
+		$sections[ self::SECTION_ID ] = __( 'Pre-order dates', 'bitnary-preorder-dates-for-woocommerce' );
 		return $sections;
 	}
 
@@ -57,14 +57,14 @@ class PDFW_Settings {
 
 		$fields = array(
 			array(
-				'title' => __( 'Pre-order dates', 'preorder-dates-for-woocommerce' ),
+				'title' => __( 'Pre-order dates', 'bitnary-preorder-dates-for-woocommerce' ),
 				'type'  => 'title',
 				'id'    => 'pdfw_text_options',
-				'desc'  => __( 'Text shown on the product page, shop listings, the cart and checkout for products in pre-order.', 'preorder-dates-for-woocommerce' ),
+				'desc'  => __( 'Text shown on the product page, shop listings, the cart and checkout for products in pre-order.', 'bitnary-preorder-dates-for-woocommerce' ),
 			),
 			array(
-				'title'    => __( 'Label', 'preorder-dates-for-woocommerce' ),
-				'desc'     => __( 'Shown on the product page and in shop listings while pre-order is open. Placeholders: {release_date}, {cutoff_date}.', 'preorder-dates-for-woocommerce' ),
+				'title'    => __( 'Label', 'bitnary-preorder-dates-for-woocommerce' ),
+				'desc'     => __( 'Shown on the product page and in shop listings while pre-order is open. Placeholders: {release_date}, {cutoff_date}.', 'bitnary-preorder-dates-for-woocommerce' ),
 				'id'       => self::OPTION_LABEL,
 				'type'     => 'text',
 				'css'      => 'min-width: 420px;',
@@ -72,22 +72,22 @@ class PDFW_Settings {
 				'desc_tip' => false,
 			),
 			array(
-				'title'   => __( 'Button text', 'preorder-dates-for-woocommerce' ),
-				'desc'    => __( 'Replaces "Add to cart" while pre-order is open.', 'preorder-dates-for-woocommerce' ),
+				'title'   => __( 'Button text', 'bitnary-preorder-dates-for-woocommerce' ),
+				'desc'    => __( 'Replaces "Add to cart" while pre-order is open.', 'bitnary-preorder-dates-for-woocommerce' ),
 				'id'      => self::OPTION_BUTTON,
 				'type'    => 'text',
-				'default' => __( 'Pre-order', 'preorder-dates-for-woocommerce' ),
+				'default' => __( 'Pre-order', 'bitnary-preorder-dates-for-woocommerce' ),
 			),
 			array(
-				'title'   => __( 'Closed message', 'preorder-dates-for-woocommerce' ),
-				'desc'    => __( 'Shown once the order cutoff has passed and the product can no longer be bought.', 'preorder-dates-for-woocommerce' ),
+				'title'   => __( 'Closed message', 'bitnary-preorder-dates-for-woocommerce' ),
+				'desc'    => __( 'Shown once the order cutoff has passed and the product can no longer be bought.', 'bitnary-preorder-dates-for-woocommerce' ),
 				'id'      => self::OPTION_CLOSED,
 				'type'    => 'text',
-				'default' => __( 'Pre-orders closed', 'preorder-dates-for-woocommerce' ),
+				'default' => __( 'Pre-orders closed', 'bitnary-preorder-dates-for-woocommerce' ),
 			),
 			array(
-				'title'   => __( 'Date format', 'preorder-dates-for-woocommerce' ),
-				'desc'    => __( 'PHP date format used for {release_date} and {cutoff_date}. Leave as-is to match Settings > General > Date Format.', 'preorder-dates-for-woocommerce' ),
+				'title'   => __( 'Date format', 'bitnary-preorder-dates-for-woocommerce' ),
+				'desc'    => __( 'PHP date format used for {release_date} and {cutoff_date}. Leave as-is to match Settings > General > Date Format.', 'bitnary-preorder-dates-for-woocommerce' ),
 				'id'      => self::OPTION_DATE_FT,
 				'type'    => 'text',
 				'default' => get_option( 'date_format', 'F j, Y' ),
@@ -97,7 +97,7 @@ class PDFW_Settings {
 				'id'   => 'pdfw_text_options',
 			),
 			array(
-				'title' => __( 'Pro', 'preorder-dates-for-woocommerce' ),
+				'title' => __( 'Pro', 'bitnary-preorder-dates-for-woocommerce' ),
 				'type'  => 'title',
 				'id'    => 'pdfw_pro_options',
 				'desc'  => self::pro_description(),
@@ -130,17 +130,17 @@ class PDFW_Settings {
 	 */
 	private static function pro_description() {
 		$items = array(
-			__( 'Warn about or block carts that mix pre-order and in-stock items', 'preorder-dates-for-woocommerce' ),
-			__( 'A reminder email sent a few days before the release date', 'preorder-dates-for-woocommerce' ),
-			__( 'Bulk edit pre-order dates across many products at once', 'preorder-dates-for-woocommerce' ),
-			__( 'Priority support', 'preorder-dates-for-woocommerce' ),
+			__( 'Warn about or block carts that mix pre-order and in-stock items', 'bitnary-preorder-dates-for-woocommerce' ),
+			__( 'A reminder email sent a few days before the release date', 'bitnary-preorder-dates-for-woocommerce' ),
+			__( 'Bulk edit pre-order dates across many products at once', 'bitnary-preorder-dates-for-woocommerce' ),
+			__( 'Priority support', 'bitnary-preorder-dates-for-woocommerce' ),
 		);
 
-		$html = '<p>' . esc_html__( 'The free plugin above is the whole feature set for pre-order dates. The paid version adds:', 'preorder-dates-for-woocommerce' ) . '</p><ul style="list-style: disc; margin-left: 1.5em;">';
+		$html = '<p>' . esc_html__( 'The free plugin above is the whole feature set for pre-order dates. The paid version adds:', 'bitnary-preorder-dates-for-woocommerce' ) . '</p><ul style="list-style: disc; margin-left: 1.5em;">';
 		foreach ( $items as $item ) {
 			$html .= '<li>' . esc_html( $item ) . '</li>';
 		}
-		$html .= '</ul><p><a href="' . esc_url( 'https://preorder.bitnarydigital.com/?src=plugin-settings' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more', 'preorder-dates-for-woocommerce' ) . '</a></p>';
+		$html .= '</ul><p><a href="' . esc_url( 'https://preorder.bitnarydigital.com/?src=plugin-settings' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Learn more', 'bitnary-preorder-dates-for-woocommerce' ) . '</a></p>';
 
 		return $html;
 	}
@@ -151,7 +151,7 @@ class PDFW_Settings {
 	 * @return string
 	 */
 	private static function default_label() {
-		return __( 'Pre-order. Ships on {release_date}. Orders close {cutoff_date}.', 'preorder-dates-for-woocommerce' );
+		return __( 'Pre-order. Ships on {release_date}. Orders close {cutoff_date}.', 'bitnary-preorder-dates-for-woocommerce' );
 	}
 
 	/**
@@ -180,7 +180,7 @@ class PDFW_Settings {
 	 * @return string
 	 */
 	public static function get_button_text() {
-		return get_option( self::OPTION_BUTTON, __( 'Pre-order', 'preorder-dates-for-woocommerce' ) );
+		return get_option( self::OPTION_BUTTON, __( 'Pre-order', 'bitnary-preorder-dates-for-woocommerce' ) );
 	}
 
 	/**
@@ -189,7 +189,7 @@ class PDFW_Settings {
 	 * @return string
 	 */
 	public static function get_closed_text() {
-		return get_option( self::OPTION_CLOSED, __( 'Pre-orders closed', 'preorder-dates-for-woocommerce' ) );
+		return get_option( self::OPTION_CLOSED, __( 'Pre-orders closed', 'bitnary-preorder-dates-for-woocommerce' ) );
 	}
 
 	/**

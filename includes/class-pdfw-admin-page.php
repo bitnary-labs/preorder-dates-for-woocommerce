@@ -34,8 +34,8 @@ class PDFW_Admin_Page {
 	public static function add_menu() {
 		add_submenu_page(
 			'woocommerce',
-			__( 'Pre-orders', 'preorder-dates-for-woocommerce' ),
-			__( 'Pre-orders', 'preorder-dates-for-woocommerce' ),
+			__( 'Pre-orders', 'bitnary-preorder-dates-for-woocommerce' ),
+			__( 'Pre-orders', 'bitnary-preorder-dates-for-woocommerce' ),
 			'manage_woocommerce',
 			self::MENU_SLUG,
 			array( __CLASS__, 'render' )
@@ -127,31 +127,31 @@ class PDFW_Admin_Page {
 		$settings = admin_url( 'admin.php?page=wc-settings&tab=products&section=' . PDFW_Settings::SECTION_ID );
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Pre-orders', 'preorder-dates-for-woocommerce' ); ?></h1>
+			<h1><?php esc_html_e( 'Pre-orders', 'bitnary-preorder-dates-for-woocommerce' ); ?></h1>
 
 			<?php if ( ! $rows['open'] && ! $rows['closed'] ) : ?>
 				<p>
-					<?php esc_html_e( 'No product is on pre-order right now. Open a product, go to the Pre-order tab, and set the two dates.', 'preorder-dates-for-woocommerce' ); ?>
+					<?php esc_html_e( 'No product is on pre-order right now. Open a product, go to the Pre-order tab, and set the two dates.', 'bitnary-preorder-dates-for-woocommerce' ); ?>
 				</p>
 			<?php endif; ?>
 
 			<?php
 			self::render_table(
-				__( 'Taking orders', 'preorder-dates-for-woocommerce' ),
-				__( 'Orders close', 'preorder-dates-for-woocommerce' ),
+				__( 'Taking orders', 'bitnary-preorder-dates-for-woocommerce' ),
+				__( 'Orders close', 'bitnary-preorder-dates-for-woocommerce' ),
 				$rows['open']
 			);
 
 			self::render_table(
-				__( 'Closed, waiting for release', 'preorder-dates-for-woocommerce' ),
-				__( 'Closed since', 'preorder-dates-for-woocommerce' ),
+				__( 'Closed, waiting for release', 'bitnary-preorder-dates-for-woocommerce' ),
+				__( 'Closed since', 'bitnary-preorder-dates-for-woocommerce' ),
 				$rows['closed']
 			);
 			?>
 
 			<p>
 				<a href="<?php echo esc_url( $settings ); ?>">
-					<?php esc_html_e( 'Pre-order settings', 'preorder-dates-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Pre-order settings', 'bitnary-preorder-dates-for-woocommerce' ); ?>
 				</a>
 			</p>
 
@@ -184,9 +184,9 @@ class PDFW_Admin_Page {
 		<table class="wp-list-table widefat striped">
 			<thead>
 				<tr>
-					<th><?php esc_html_e( 'Product', 'preorder-dates-for-woocommerce' ); ?></th>
+					<th><?php esc_html_e( 'Product', 'bitnary-preorder-dates-for-woocommerce' ); ?></th>
 					<th><?php echo esc_html( $date_column ); ?></th>
-					<th><?php esc_html_e( 'Ships on', 'preorder-dates-for-woocommerce' ); ?></th>
+					<th><?php esc_html_e( 'Ships on', 'bitnary-preorder-dates-for-woocommerce' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -197,8 +197,8 @@ class PDFW_Admin_Page {
 							<?php echo esc_html( $row['product']->get_name() ); ?>
 						</a>
 					</td>
-					<td><?php echo esc_html( $row['cutoff'] ? PDFW_Settings::format_date( $row['cutoff'] ) : __( 'Not set', 'preorder-dates-for-woocommerce' ) ); ?></td>
-					<td><?php echo esc_html( $row['release'] ? PDFW_Settings::format_date( $row['release'] ) : __( 'Not set', 'preorder-dates-for-woocommerce' ) ); ?></td>
+					<td><?php echo esc_html( $row['cutoff'] ? PDFW_Settings::format_date( $row['cutoff'] ) : __( 'Not set', 'bitnary-preorder-dates-for-woocommerce' ) ); ?></td>
+					<td><?php echo esc_html( $row['release'] ? PDFW_Settings::format_date( $row['release'] ) : __( 'Not set', 'bitnary-preorder-dates-for-woocommerce' ) ); ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>

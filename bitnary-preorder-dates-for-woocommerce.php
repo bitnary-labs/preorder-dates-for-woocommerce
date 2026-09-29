@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Preorder Dates for WooCommerce
+ * Plugin Name:       Bitnary Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
  * Version:           0.3.1
@@ -13,7 +13,7 @@
  * Author:            Davi Souto
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       preorder-dates-for-woocommerce
+ * Text Domain:       bitnary-preorder-dates-for-woocommerce
  * Domain Path:       /languages
  *
  * @package PreorderDatesForWooCommerce
@@ -50,7 +50,7 @@ function pdfw_fs() {
 		$pdfw_fs = fs_dynamic_init(
 			array(
 				'id'                  => '39537',
-				'slug'                => 'preorder-dates-for-woocommerce',
+				'slug'                => 'bitnary-preorder-dates-for-woocommerce',
 				'type'                => 'plugin',
 				// Public by design: it identifies the product to Freemius from
 				// the browser. The secret key is not in this repository and is
@@ -114,7 +114,7 @@ function pdfw_bootstrap() {
 		add_action(
 			'admin_notices',
 			function () {
-				echo '<div class="notice notice-error"><p>' . esc_html__( 'Preorder Dates for WooCommerce requires WooCommerce to be installed and active.', 'preorder-dates-for-woocommerce' ) . '</p></div>';
+				echo '<div class="notice notice-error"><p>' . esc_html__( 'Bitnary Preorder Dates for WooCommerce requires WooCommerce to be installed and active.', 'bitnary-preorder-dates-for-woocommerce' ) . '</p></div>';
 			}
 		);
 		return;

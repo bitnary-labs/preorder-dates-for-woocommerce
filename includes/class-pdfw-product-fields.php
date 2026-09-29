@@ -32,7 +32,7 @@ class PDFW_Product_Fields {
 	 */
 	public static function add_tab( $tabs ) {
 		$tabs['pdfw_preorder'] = array(
-			'label'    => __( 'Pre-order', 'preorder-dates-for-woocommerce' ),
+			'label'    => __( 'Pre-order', 'bitnary-preorder-dates-for-woocommerce' ),
 			'target'   => 'pdfw_preorder_data',
 			'class'    => array( 'show_if_simple' ),
 			'priority' => 21,

@@ -3,7 +3,7 @@
 # Usage: bin/build-zip.sh [output-dir]   (default: ./dist)
 set -euo pipefail
 
-slug="preorder-dates-for-woocommerce"
+slug="bitnary-preorder-dates-for-woocommerce"
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 out="${1:-$here/dist}"
 mkdir -p "$out"
@@ -17,7 +17,12 @@ fi
 
 zipfile="$out/$slug-$version.zip"
 rm -f "$zipfile"
-( cd "$here/.." && zip -rq "$zipfile" "$slug" \
+# The checkout folder keeps the repository's name, so the zip is built through a
+# link that carries the plugin slug instead.
+stage="$(mktemp -d)"
+trap 'rm -rf "${stage:?}"' EXIT
+ln -s "$here" "$stage/$slug"
+( cd "$stage" && zip -rq "$zipfile" "$slug" \
     -x "*/.*" "*/pro/*" \
        "*/bin/*" "*/dist/*" "*/tests/*" "*/vendor/*" \
        "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/README.md" )

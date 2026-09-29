@@ -139,7 +139,7 @@ class PDFW_Frontend {
 			$release = PDFW_Data::get_release( $product );
 			if ( $release ) {
 				$item_data[] = array(
-					'key'   => __( 'Ships on', 'preorder-dates-for-woocommerce' ),
+					'key'   => __( 'Ships on', 'bitnary-preorder-dates-for-woocommerce' ),
 					'value' => PDFW_Settings::format_date( $release ),
 				);
 			}

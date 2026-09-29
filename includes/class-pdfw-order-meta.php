@@ -57,6 +57,6 @@ class PDFW_Order_Meta {
 		// Visible copy: WooCommerce shows any order item meta whose key does
 		// not start with "_" automatically, in both the admin order screen and
 		// order emails, using the key itself as the label.
-		$item->add_meta_data( __( 'Ships on', 'preorder-dates-for-woocommerce' ), PDFW_Settings::format_date( $release ), true );
+		$item->add_meta_data( __( 'Ships on', 'bitnary-preorder-dates-for-woocommerce' ), PDFW_Settings::format_date( $release ), true );
 	}
 }

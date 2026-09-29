@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  * to inject a panel inside the existing Variations tab rather than a
  * separate one.
  */
-class PDW_Variation_Fields {
+class PDFW_Variation_Fields {
 
 	/**
 	 * Registers hooks.
@@ -38,11 +38,11 @@ class PDW_Variation_Fields {
 			return;
 		}
 
-		$enabled = PDW_Data::is_enabled( $product );
-		$cutoff  = PDW_Data::gmt_timestamp_to_local_input( PDW_Data::get_cutoff( $product ) );
-		$release = PDW_Data::gmt_timestamp_to_local_input( PDW_Data::get_release( $product ) );
+		$enabled = PDFW_Data::is_enabled( $product );
+		$cutoff  = PDFW_Data::gmt_timestamp_to_local_input( PDFW_Data::get_cutoff( $product ) );
+		$release = PDFW_Data::gmt_timestamp_to_local_input( PDFW_Data::get_release( $product ) );
 
-		include PDW_PLUGIN_DIR . 'includes/views/variation-panel.php';
+		include PDFW_PLUGIN_DIR . 'includes/views/variation-panel.php';
 	}
 
 	/**
@@ -70,11 +70,11 @@ class PDW_Variation_Fields {
 			return;
 		}
 
-		$field       = 'pdw_variation_enabled';
+		$field       = 'pdfw_variation_enabled';
 		$enabled     = ! empty( $_POST[ $field ][ $loop ] );
-		$cutoff_raw  = isset( $_POST['pdw_variation_cutoff'][ $loop ] ) ? sanitize_text_field( wp_unslash( $_POST['pdw_variation_cutoff'][ $loop ] ) ) : '';
-		$release_raw = isset( $_POST['pdw_variation_release'][ $loop ] ) ? sanitize_text_field( wp_unslash( $_POST['pdw_variation_release'][ $loop ] ) ) : '';
+		$cutoff_raw  = isset( $_POST['pdfw_variation_cutoff'][ $loop ] ) ? sanitize_text_field( wp_unslash( $_POST['pdfw_variation_cutoff'][ $loop ] ) ) : '';
+		$release_raw = isset( $_POST['pdfw_variation_release'][ $loop ] ) ? sanitize_text_field( wp_unslash( $_POST['pdfw_variation_release'][ $loop ] ) ) : '';
 
-		PDW_Data::save_from_request( $product, $enabled, $cutoff_raw, $release_raw );
+		PDFW_Data::save_from_request( $product, $enabled, $cutoff_raw, $release_raw );
 	}
 }

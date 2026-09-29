@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,6 +136,13 @@ timezone (`wp_timezone()`).
 
 == Changelog ==
 
+= 0.3.1 =
+* Change: every function, class, hook, option and meta key now starts with
+  "pdfw" instead of "pdw", which was short enough to clash with other plugins.
+  Settings and product dates saved by earlier versions are moved over once, on
+  the first load after updating. Code hooking `pdw_loaded` should hook
+  `pdfw_loaded` now.
+
 = 0.3.0 =
 * New: licensing, the account screen and the upgrade path now run on the Freemius
   SDK, which is also what lets the paid build update itself. On WordPress.org the
@@ -171,6 +178,9 @@ timezone (`wp_timezone()`).
   item, settings page, HPOS and cart/checkout blocks compatibility.
 
 == Upgrade Notice ==
+
+= 0.3.1 =
+Renames the plugin's internal prefix. Your dates and settings carry over on their own.
 
 = 0.1.1 =
 Fixes variation pre-order label/button text and shop listing indication for variable products.

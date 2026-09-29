@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
  * Copies the release date onto the order line item, so it survives on the order
  * after the product itself goes back to normal.
  */
-class PDW_Order_Meta {
+class PDFW_Order_Meta {
 
 	/**
 	 * Internal, hidden meta key holding the raw GMT timestamp (kept for
@@ -22,7 +22,7 @@ class PDW_Order_Meta {
 	 *
 	 * @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/class-wc-order-item.php
 	 */
-	const META_RELEASE_RAW = '_pdw_release_gmt';
+	const META_RELEASE_RAW = '_pdfw_release_gmt';
 
 	/**
 	 * Registers hooks.
@@ -42,11 +42,11 @@ class PDW_Order_Meta {
 	public static function add_line_item_meta( $item, $cart_item_key, $values, $order ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $order is part of the woocommerce_checkout_create_order_line_item signature.
 		$product = isset( $values['data'] ) ? $values['data'] : null;
 
-		if ( ! $product instanceof WC_Product || 'open' !== PDW_Data::get_state( $product ) ) {
+		if ( ! $product instanceof WC_Product || 'open' !== PDFW_Data::get_state( $product ) ) {
 			return;
 		}
 
-		$release = PDW_Data::get_release( $product );
+		$release = PDFW_Data::get_release( $product );
 		if ( ! $release ) {
 			return;
 		}
@@ -57,6 +57,6 @@ class PDW_Order_Meta {
 		// Visible copy: WooCommerce shows any order item meta whose key does
 		// not start with "_" automatically, in both the admin order screen and
 		// order emails, using the key itself as the label.
-		$item->add_meta_data( __( 'Ships on', 'preorder-dates-for-woocommerce' ), PDW_Settings::format_date( $release ), true );
+		$item->add_meta_data( __( 'Ships on', 'preorder-dates-for-woocommerce' ), PDFW_Settings::format_date( $release ), true );
 	}
 }

@@ -9,11 +9,11 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Variable products configure pre-order per variation instead (see
- * PDW_Variation_Fields), so this tab only targets simple products, the same
+ * PDFW_Variation_Fields), so this tab only targets simple products, the same
  * pattern used by every free pre-order plugin checked in the gap analysis
  * (softtent, YITH, PRENA all mark their product-level tab show_if_simple).
  */
-class PDW_Product_Fields {
+class PDFW_Product_Fields {
 
 	/**
 	 * Registers hooks.
@@ -31,9 +31,9 @@ class PDW_Product_Fields {
 	 * @return array
 	 */
 	public static function add_tab( $tabs ) {
-		$tabs['pdw_preorder'] = array(
+		$tabs['pdfw_preorder'] = array(
 			'label'    => __( 'Pre-order', 'preorder-dates-for-woocommerce' ),
-			'target'   => 'pdw_preorder_data',
+			'target'   => 'pdfw_preorder_data',
 			'class'    => array( 'show_if_simple' ),
 			'priority' => 21,
 		);
@@ -51,11 +51,11 @@ class PDW_Product_Fields {
 			return;
 		}
 
-		$enabled = PDW_Data::is_enabled( $product );
-		$cutoff  = PDW_Data::gmt_timestamp_to_local_input( PDW_Data::get_cutoff( $product ) );
-		$release = PDW_Data::gmt_timestamp_to_local_input( PDW_Data::get_release( $product ) );
+		$enabled = PDFW_Data::is_enabled( $product );
+		$cutoff  = PDFW_Data::gmt_timestamp_to_local_input( PDFW_Data::get_cutoff( $product ) );
+		$release = PDFW_Data::gmt_timestamp_to_local_input( PDFW_Data::get_release( $product ) );
 
-		include PDW_PLUGIN_DIR . 'includes/views/product-panel.php';
+		include PDFW_PLUGIN_DIR . 'includes/views/product-panel.php';
 	}
 
 	/**
@@ -82,10 +82,10 @@ class PDW_Product_Fields {
 			return;
 		}
 
-		$enabled     = ! empty( $_POST['pdw_enabled'] );
-		$cutoff_raw  = isset( $_POST['pdw_cutoff'] ) ? sanitize_text_field( wp_unslash( $_POST['pdw_cutoff'] ) ) : '';
-		$release_raw = isset( $_POST['pdw_release'] ) ? sanitize_text_field( wp_unslash( $_POST['pdw_release'] ) ) : '';
+		$enabled     = ! empty( $_POST['pdfw_enabled'] );
+		$cutoff_raw  = isset( $_POST['pdfw_cutoff'] ) ? sanitize_text_field( wp_unslash( $_POST['pdfw_cutoff'] ) ) : '';
+		$release_raw = isset( $_POST['pdfw_release'] ) ? sanitize_text_field( wp_unslash( $_POST['pdfw_release'] ) ) : '';
 
-		PDW_Data::save_from_request( $product, $enabled, $cutoff_raw, $release_raw );
+		PDFW_Data::save_from_request( $product, $enabled, $cutoff_raw, $release_raw );
 	}
 }

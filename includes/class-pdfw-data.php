@@ -12,11 +12,11 @@ defined( 'ABSPATH' ) || exit;
  * server or PHP timezone settings; only the admin UI and the front-end labels
  * convert them to and from the store timezone (wp_timezone()).
  */
-class PDW_Data {
+class PDFW_Data {
 
-	const META_ENABLED = '_pdw_enabled';
-	const META_CUTOFF  = '_pdw_cutoff_gmt';
-	const META_RELEASE = '_pdw_release_gmt';
+	const META_ENABLED = '_pdfw_enabled';
+	const META_CUTOFF  = '_pdfw_cutoff_gmt';
+	const META_RELEASE = '_pdfw_release_gmt';
 
 	/**
 	 * Whether pre-order is turned on for this product or variation, as stored
@@ -54,7 +54,7 @@ class PDW_Data {
 	/**
 	 * Resolves the current pre-order state, lazily clearing expired data along
 	 * the way (the "verificação preguiçosa na leitura" required alongside the
-	 * daily cron backstop in PDW_Cron).
+	 * daily cron backstop in PDFW_Cron).
 	 *
 	 * @param WC_Product|null $product Product or variation.
 	 * @return string|false 'open', 'closed', or false when pre-order does not apply.
@@ -118,7 +118,7 @@ class PDW_Data {
 	/**
 	 * Removes all pre-order meta from a product or variation and persists it.
 	 * Called once the release date has passed, either lazily (get_state) or
-	 * from the daily cron event (PDW_Cron).
+	 * from the daily cron event (PDFW_Cron).
 	 *
 	 * @param WC_Product $product Product or variation.
 	 */

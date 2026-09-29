@@ -18,10 +18,9 @@ fi
 zipfile="$out/$slug-$version.zip"
 rm -f "$zipfile"
 ( cd "$here/.." && zip -rq "$zipfile" "$slug" \
-    -x "*/.git/*" "*/.github/*" "*/.gitignore" "*/.wordpress-org/*" "*/pro/*" \
+    -x "*/.*" "*/pro/*" \
        "*/bin/*" "*/dist/*" "*/tests/*" "*/vendor/*" \
-       "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/.phpcs.xml.dist" \
-       "*/.phpunit.result.cache" "*/README.md" "*/.DS_Store" )
+       "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/README.md" )
 
 # Only the path goes to stdout, so a caller can do "zip=$(build.sh)" without
 # the summary below breaking the pipe under "set -o pipefail".

@@ -3,7 +3,7 @@
  * variation currently selected on a variable product's page, and restores
  * the original text once the selection is cleared.
  *
- * Only enqueued on variable products (see PDW_Frontend::enqueue_variation_script()).
+ * Only enqueued on variable products (see PDFW_Frontend::enqueue_variation_script()).
  * Listens to the 'found_variation'/'reset_data' events fired by WooCommerce's
  * own wc-add-to-cart-variation.js, which does not change button text itself,
  * only CSS classes.
@@ -17,7 +17,7 @@
 		var originalText = $button.text();
 
 		$form.on( 'found_variation', function ( event, variation ) {
-			$button.text( variation && variation.pdw_button_text ? variation.pdw_button_text : originalText );
+			$button.text( variation && variation.pdfw_button_text ? variation.pdfw_button_text : originalText );
 		} );
 
 		$form.on( 'reset_data', function () {

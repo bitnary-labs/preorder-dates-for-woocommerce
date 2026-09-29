@@ -3,7 +3,7 @@
  * Minimal stand-ins for the WordPress functions the tested classes call.
  *
  * Each one behaves the way WordPress documents it, with the state a test needs
- * exposed through PDW_Test_State so a test can set the store timezone or an
+ * exposed through PDFW_Test_State so a test can set the store timezone or an
  * option and then assert on the result.
  *
  * @package PreorderDatesForWooCommerce
@@ -19,7 +19,7 @@ defined( 'DAY_IN_SECONDS' ) || define( 'DAY_IN_SECONDS', 86400 );
 /**
  * Holds the fake site state for the duration of one test.
  */
-class PDW_Test_State {
+class PDFW_Test_State {
 
 	/**
 	 * Option name => value.
@@ -49,7 +49,7 @@ if ( ! function_exists( 'wp_timezone' ) ) {
 	 * @return DateTimeZone
 	 */
 	function wp_timezone(): DateTimeZone {
-		return new DateTimeZone( PDW_Test_State::$timezone );
+		return new DateTimeZone( PDFW_Test_State::$timezone );
 	}
 }
 
@@ -60,7 +60,7 @@ if ( ! function_exists( 'get_option' ) ) {
 	 * @return mixed
 	 */
 	function get_option( string $name, $default = false ) {
-		return array_key_exists( $name, PDW_Test_State::$options ) ? PDW_Test_State::$options[ $name ] : $default;
+		return array_key_exists( $name, PDFW_Test_State::$options ) ? PDFW_Test_State::$options[ $name ] : $default;
 	}
 }
 

@@ -2,7 +2,7 @@
 /**
  * Daily backstop that clears pre-order data for products whose release date
  * has passed, for products that are not read (and so never hit the lazy
- * check in PDW_Data::get_state()) before then.
+ * check in PDFW_Data::get_state()) before then.
  *
  * @package PreorderDatesForWooCommerce
  */
@@ -12,13 +12,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Daily cleanup of pre-order data whose release date has passed.
  */
-class PDW_Cron {
+class PDFW_Cron {
 
 	/**
 	 * Registers hooks.
 	 */
 	public static function init() {
-		add_action( PDW_Install::CRON_HOOK, array( __CLASS__, 'run' ) );
+		add_action( PDFW_Install::CRON_HOOK, array( __CLASS__, 'run' ) );
 	}
 
 	/**
@@ -45,11 +45,11 @@ class PDW_Cron {
 				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- bounded to enabled pre-orders past release, run once a day.
 					'relation' => 'AND',
 					array(
-						'key'   => PDW_Data::META_ENABLED,
+						'key'   => PDFW_Data::META_ENABLED,
 						'value' => 'yes',
 					),
 					array(
-						'key'     => PDW_Data::META_RELEASE,
+						'key'     => PDFW_Data::META_RELEASE,
 						'value'   => time(),
 						'compare' => '<',
 						'type'    => 'NUMERIC',
@@ -61,7 +61,7 @@ class PDW_Cron {
 		foreach ( $ids as $id ) {
 			$product = wc_get_product( $id );
 			if ( $product ) {
-				PDW_Data::clear( $product );
+				PDFW_Data::clear( $product );
 			}
 		}
 	}

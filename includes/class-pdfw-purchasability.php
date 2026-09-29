@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  * WooCommerce asks: the product page, the classic cart, and the Store API that
  * the cart and checkout blocks use.
  */
-class PDW_Purchasability {
+class PDFW_Purchasability {
 
 	/**
 	 * Registers hooks.
@@ -76,7 +76,7 @@ class PDW_Purchasability {
 	 * @return bool
 	 */
 	public static function filter_purchasable( $purchasable, $product ) {
-		$state = PDW_Data::get_state( $product );
+		$state = PDFW_Data::get_state( $product );
 
 		if ( 'open' === $state ) {
 			return true;
@@ -97,7 +97,7 @@ class PDW_Purchasability {
 	 * @return bool
 	 */
 	public static function filter_in_stock( $in_stock, $product ) {
-		if ( 'open' === PDW_Data::get_state( $product ) ) {
+		if ( 'open' === PDFW_Data::get_state( $product ) ) {
 			return true;
 		}
 		return $in_stock;
@@ -111,7 +111,7 @@ class PDW_Purchasability {
 	 * @return array
 	 */
 	public static function filter_availability( $availability, $product ) {
-		if ( 'open' === PDW_Data::get_state( $product ) ) {
+		if ( 'open' === PDFW_Data::get_state( $product ) ) {
 			return array(
 				'availability' => '',
 				'class'        => '',
@@ -129,13 +129,13 @@ class PDW_Purchasability {
 	 * @return array
 	 */
 	public static function filter_available_variation( $data, $product, $variation ) {
-		$state = PDW_Data::get_state( $variation );
+		$state = PDFW_Data::get_state( $variation );
 
 		if ( 'open' === $state ) {
-			$data['availability_html'] = '<p class="pdw-preorder-label">' . esc_html( PDW_Settings::get_open_label( $variation ) ) . '</p>';
-			$data['pdw_button_text']   = PDW_Settings::get_button_text();
+			$data['availability_html'] = '<p class="pdfw-preorder-label">' . esc_html( PDFW_Settings::get_open_label( $variation ) ) . '</p>';
+			$data['pdfw_button_text']  = PDFW_Settings::get_button_text();
 		} elseif ( 'closed' === $state ) {
-			$data['availability_html'] = '<p class="pdw-preorder-label pdw-preorder-closed">' . esc_html( PDW_Settings::get_closed_text() ) . '</p>';
+			$data['availability_html'] = '<p class="pdfw-preorder-label pdfw-preorder-closed">' . esc_html( PDFW_Settings::get_closed_text() ) . '</p>';
 		}
 
 		return $data;
@@ -153,8 +153,8 @@ class PDW_Purchasability {
 	public static function validate_add_to_cart( $passed, $product_id, $quantity, $variation_id = 0 ) {
 		$product = wc_get_product( $variation_id ? $variation_id : $product_id );
 
-		if ( $product && 'closed' === PDW_Data::get_state( $product ) ) {
-			wc_add_notice( PDW_Settings::get_closed_text(), 'error' );
+		if ( $product && 'closed' === PDFW_Data::get_state( $product ) ) {
+			wc_add_notice( PDFW_Settings::get_closed_text(), 'error' );
 			return false;
 		}
 
@@ -170,10 +170,10 @@ class PDW_Purchasability {
 	 * @throws \Automattic\WooCommerce\StoreApi\Exceptions\RouteException When pre-order is closed.
 	 */
 	public static function validate_store_api_add_to_cart( $product, $request ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- $request is part of the woocommerce_store_api_validate_add_to_cart signature.
-		if ( 'closed' === PDW_Data::get_state( $product ) ) {
+		if ( 'closed' === PDFW_Data::get_state( $product ) ) {
 			throw new \Automattic\WooCommerce\StoreApi\Exceptions\RouteException(
 				'preorder_dates_for_woocommerce_closed',
-				esc_html( PDW_Settings::get_closed_text() ),
+				esc_html( PDFW_Settings::get_closed_text() ),
 				400
 			);
 		}

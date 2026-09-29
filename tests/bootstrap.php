@@ -17,10 +17,10 @@
 declare(strict_types=1);
 
 define( 'ABSPATH', __DIR__ . '/' );
-define( 'PDW_TESTING', true );
+define( 'PDFW_TESTING', true );
 
 require_once __DIR__ . '/stubs/wordpress.php';
 require_once __DIR__ . '/stubs/class-wc-product.php';
 
-require_once dirname( __DIR__ ) . '/includes/class-pdw-data.php';
-require_once dirname( __DIR__ ) . '/includes/class-pdw-settings.php';
+require_once dirname( __DIR__ ) . '/includes/class-pdfw-data.php';
+require_once dirname( __DIR__ ) . '/includes/class-pdfw-settings.php';

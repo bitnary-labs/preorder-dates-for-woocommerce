@@ -16,13 +16,13 @@ defined( 'ABSPATH' ) || exit;
  *
  * @see https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/admin/settings/class-wc-settings-page.php
  */
-class PDW_Settings {
+class PDFW_Settings {
 
 	const SECTION_ID     = 'preorder-dates';
-	const OPTION_LABEL   = 'pdw_label_format';
-	const OPTION_BUTTON  = 'pdw_button_text';
-	const OPTION_CLOSED  = 'pdw_closed_text';
-	const OPTION_DATE_FT = 'pdw_date_format';
+	const OPTION_LABEL   = 'pdfw_label_format';
+	const OPTION_BUTTON  = 'pdfw_button_text';
+	const OPTION_CLOSED  = 'pdfw_closed_text';
+	const OPTION_DATE_FT = 'pdfw_date_format';
 
 	/**
 	 * Registers hooks.
@@ -59,7 +59,7 @@ class PDW_Settings {
 			array(
 				'title' => __( 'Pre-order dates', 'preorder-dates-for-woocommerce' ),
 				'type'  => 'title',
-				'id'    => 'pdw_text_options',
+				'id'    => 'pdfw_text_options',
 				'desc'  => __( 'Text shown on the product page, shop listings, the cart and checkout for products in pre-order.', 'preorder-dates-for-woocommerce' ),
 			),
 			array(
@@ -94,17 +94,17 @@ class PDW_Settings {
 			),
 			array(
 				'type' => 'sectionend',
-				'id'   => 'pdw_text_options',
+				'id'   => 'pdfw_text_options',
 			),
 			array(
 				'title' => __( 'Pro', 'preorder-dates-for-woocommerce' ),
 				'type'  => 'title',
-				'id'    => 'pdw_pro_options',
+				'id'    => 'pdfw_pro_options',
 				'desc'  => self::pro_description(),
 			),
 			array(
 				'type' => 'sectionend',
-				'id'   => 'pdw_pro_options',
+				'id'   => 'pdfw_pro_options',
 			),
 		);
 
@@ -118,7 +118,7 @@ class PDW_Settings {
 		 *
 		 * @param array $fields WooCommerce settings field definitions.
 		 */
-		return apply_filters( 'pdw_settings_fields', $fields );
+		return apply_filters( 'pdfw_settings_fields', $fields );
 	}
 
 	/**
@@ -162,8 +162,8 @@ class PDW_Settings {
 	 */
 	public static function get_open_label( WC_Product $product ) {
 		$format  = get_option( self::OPTION_LABEL, self::default_label() );
-		$release = PDW_Data::get_release( $product );
-		$cutoff  = PDW_Data::get_cutoff( $product );
+		$release = PDFW_Data::get_release( $product );
+		$cutoff  = PDFW_Data::get_cutoff( $product );
 
 		return strtr(
 			$format,

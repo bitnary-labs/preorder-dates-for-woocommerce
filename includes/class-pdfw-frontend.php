@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
  * Everything the shopper sees: the pre-order label, the button text, and the
  * release date line in the cart and checkout.
  */
-class PDW_Frontend {
+class PDFW_Frontend {
 
 	/**
 	 * Registers hooks.
@@ -50,10 +50,10 @@ class PDW_Frontend {
 	 *
 	 * A variable product only ever carries pre-order meta on its variations,
 	 * never on itself, so it is summarized here using whichever variation is
-	 * open for pre-order and ships soonest (see PDW_Data::get_nearest_open_variation()).
+	 * open for pre-order and ships soonest (see PDFW_Data::get_nearest_open_variation()).
 	 * A variation-specific label/closed message is also shown once a shopper
 	 * picks a variation on the product page, via filter_available_variation()
-	 * in PDW_Purchasability and the enqueued button-text script below.
+	 * in PDFW_Purchasability and the enqueued button-text script below.
 	 */
 	public static function render_label() {
 		global $product;
@@ -63,21 +63,21 @@ class PDW_Frontend {
 		}
 
 		if ( $product instanceof WC_Product_Variable ) {
-			$variation = PDW_Data::get_nearest_open_variation( $product );
+			$variation = PDFW_Data::get_nearest_open_variation( $product );
 
 			if ( $variation ) {
-				echo '<p class="pdw-preorder-label">' . esc_html( PDW_Settings::get_open_label( $variation ) ) . '</p>';
+				echo '<p class="pdfw-preorder-label">' . esc_html( PDFW_Settings::get_open_label( $variation ) ) . '</p>';
 			}
 
 			return;
 		}
 
-		$state = PDW_Data::get_state( $product );
+		$state = PDFW_Data::get_state( $product );
 
 		if ( 'open' === $state ) {
-			echo '<p class="pdw-preorder-label">' . esc_html( PDW_Settings::get_open_label( $product ) ) . '</p>';
+			echo '<p class="pdfw-preorder-label">' . esc_html( PDFW_Settings::get_open_label( $product ) ) . '</p>';
 		} elseif ( 'closed' === $state ) {
-			echo '<p class="pdw-preorder-label pdw-preorder-closed">' . esc_html( PDW_Settings::get_closed_text() ) . '</p>';
+			echo '<p class="pdfw-preorder-label pdfw-preorder-closed">' . esc_html( PDFW_Settings::get_closed_text() ) . '</p>';
 		}
 	}
 
@@ -98,10 +98,10 @@ class PDW_Frontend {
 		}
 
 		wp_enqueue_script(
-			'pdw-variation',
-			PDW_PLUGIN_URL . 'assets/js/variation.js',
+			'pdfw-variation',
+			PDFW_PLUGIN_URL . 'assets/js/variation.js',
 			array( 'jquery', 'wc-add-to-cart-variation' ),
-			PDW_VERSION,
+			PDFW_VERSION,
 			true
 		);
 	}
@@ -118,8 +118,8 @@ class PDW_Frontend {
 			global $product; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- WooCommerce core also falls back to the loop global here.
 		}
 
-		if ( $product instanceof WC_Product && 'open' === PDW_Data::get_state( $product ) ) {
-			return PDW_Settings::get_button_text();
+		if ( $product instanceof WC_Product && 'open' === PDFW_Data::get_state( $product ) ) {
+			return PDFW_Settings::get_button_text();
 		}
 
 		return $text;
@@ -135,12 +135,12 @@ class PDW_Frontend {
 	public static function add_cart_item_data( $item_data, $cart_item ) {
 		$product = isset( $cart_item['data'] ) ? $cart_item['data'] : null;
 
-		if ( $product instanceof WC_Product && 'open' === PDW_Data::get_state( $product ) ) {
-			$release = PDW_Data::get_release( $product );
+		if ( $product instanceof WC_Product && 'open' === PDFW_Data::get_state( $product ) ) {
+			$release = PDFW_Data::get_release( $product );
 			if ( $release ) {
 				$item_data[] = array(
 					'key'   => __( 'Ships on', 'preorder-dates-for-woocommerce' ),
-					'value' => PDW_Settings::format_date( $release ),
+					'value' => PDFW_Settings::format_date( $release ),
 				);
 			}
 		}

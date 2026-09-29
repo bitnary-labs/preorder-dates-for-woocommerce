@@ -3,7 +3,7 @@
  * Plugin Name:       Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
- * Version:           0.3.0
+ * Version:           0.3.1
  * Requires at least: 6.6
  * Tested up to:      7.1
  * Requires PHP:      8.1
@@ -21,11 +21,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PDW_VERSION', '0.3.0' );
-define( 'PDW_PLUGIN_FILE', __FILE__ );
-define( 'PDW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'PDW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'PDW_MENU_SLUG', 'preorder-dates' );
+define( 'PDFW_VERSION', '0.3.1' );
+define( 'PDFW_PLUGIN_FILE', __FILE__ );
+define( 'PDFW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'PDFW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'PDFW_MENU_SLUG', 'preorder-dates' );
 
 /**
  * Sets up Freemius, which handles licensing, the upgrade screens and updates
@@ -41,13 +41,13 @@ define( 'PDW_MENU_SLUG', 'preorder-dates' );
  *
  * @return Freemius
  */
-function pdw_fs() {
-	global $pdw_fs;
+function pdfw_fs() {
+	global $pdfw_fs;
 
-	if ( ! isset( $pdw_fs ) ) {
-		require_once PDW_PLUGIN_DIR . 'freemius/start.php';
+	if ( ! isset( $pdfw_fs ) ) {
+		require_once PDFW_PLUGIN_DIR . 'freemius/start.php';
 
-		$pdw_fs = fs_dynamic_init(
+		$pdfw_fs = fs_dynamic_init(
 			array(
 				'id'                  => '39537',
 				'slug'                => 'preorder-dates-for-woocommerce',
@@ -56,13 +56,13 @@ function pdw_fs() {
 				// the browser. The secret key is not in this repository and is
 				// never needed by the plugin.
 				'public_key'          => 'pk_e5aab1ef3cbc31bcd58445d6e4394',
-				'is_premium'          => is_readable( PDW_PLUGIN_DIR . 'pro/load.php' ),
+				'is_premium'          => is_readable( PDFW_PLUGIN_DIR . 'pro/load.php' ),
 				'has_premium_version' => true,
 				'has_paid_plans'      => true,
 				'has_addons'          => false,
 				'is_org_compliant'    => true,
 				'menu'                => array(
-					'slug'    => PDW_MENU_SLUG,
+					'slug'    => PDFW_MENU_SLUG,
 					'parent'  => array( 'slug' => 'woocommerce' ),
 					'support' => false,
 				),
@@ -70,22 +70,22 @@ function pdw_fs() {
 		);
 	}
 
-	return $pdw_fs;
+	return $pdfw_fs;
 }
 
-pdw_fs();
+pdfw_fs();
 
 /**
  * Fires once Freemius is ready, per its own convention.
  *
  * @since 0.3.0
  */
-do_action( 'pdw_fs_loaded' );
+do_action( 'pdfw_fs_loaded' );
 
-require_once PDW_PLUGIN_DIR . 'includes/class-pdw-install.php';
+require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-install.php';
 
-register_activation_hook( __FILE__, array( 'PDW_Install', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'PDW_Install', 'deactivate' ) );
+register_activation_hook( __FILE__, array( 'PDFW_Install', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'PDFW_Install', 'deactivate' ) );
 
 /**
  * Declares compatibility with WooCommerce features that this plugin was built and tested against.
@@ -98,18 +98,18 @@ add_action(
 	'before_woocommerce_init',
 	function () {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', PDW_PLUGIN_FILE, true );
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', PDW_PLUGIN_FILE, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', PDFW_PLUGIN_FILE, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', PDFW_PLUGIN_FILE, true );
 		}
 	}
 );
 
-add_action( 'plugins_loaded', 'pdw_bootstrap' );
+add_action( 'plugins_loaded', 'pdfw_bootstrap' );
 
 /**
  * Loads the plugin once WooCommerce is confirmed active, or shows an admin notice otherwise.
  */
-function pdw_bootstrap() {
+function pdfw_bootstrap() {
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		add_action(
 			'admin_notices',
@@ -120,30 +120,32 @@ function pdw_bootstrap() {
 		return;
 	}
 
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-data.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-settings.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-product-fields.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-variation-fields.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-purchasability.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-frontend.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-order-meta.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-cron.php';
-	require_once PDW_PLUGIN_DIR . 'includes/class-pdw-admin-page.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-data.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-settings.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-product-fields.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-variation-fields.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-purchasability.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-frontend.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-order-meta.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-cron.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-admin-page.php';
 
-	PDW_Settings::init();
-	PDW_Product_Fields::init();
-	PDW_Variation_Fields::init();
-	PDW_Purchasability::init();
-	PDW_Frontend::init();
-	PDW_Order_Meta::init();
-	PDW_Cron::init();
-	PDW_Admin_Page::init();
+	add_action( 'woocommerce_after_register_post_type', array( 'PDFW_Install', 'migrate_legacy_prefix' ) );
+
+	PDFW_Settings::init();
+	PDFW_Product_Fields::init();
+	PDFW_Variation_Fields::init();
+	PDFW_Purchasability::init();
+	PDFW_Frontend::init();
+	PDFW_Order_Meta::init();
+	PDFW_Cron::init();
+	PDFW_Admin_Page::init();
 
 	// The paid build of this plugin ships an extra pro/ folder next to these
 	// files. It is absent from the version on WordPress.org, so this does
 	// nothing there.
-	if ( is_readable( PDW_PLUGIN_DIR . 'pro/load.php' ) ) {
-		require_once PDW_PLUGIN_DIR . 'pro/load.php';
+	if ( is_readable( PDFW_PLUGIN_DIR . 'pro/load.php' ) ) {
+		require_once PDFW_PLUGIN_DIR . 'pro/load.php';
 	}
 
 	/**
@@ -155,5 +157,5 @@ function pdw_bootstrap() {
 	 *
 	 * @since 0.2.0
 	 */
-	do_action( 'pdw_loaded' );
+	do_action( 'pdfw_loaded' );
 }

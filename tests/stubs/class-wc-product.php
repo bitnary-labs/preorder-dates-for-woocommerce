@@ -3,7 +3,7 @@
  * A stand-in for WC_Product covering only the meta API the plugin uses.
  *
  * It records whether save() was called, which is how the tests assert that
- * PDW_Data::get_state() really does clear expired pre-order data rather than
+ * PDFW_Data::get_state() really does clear expired pre-order data rather than
  * just reporting it as gone.
  *
  * @package PreorderDatesForWooCommerce

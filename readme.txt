@@ -101,6 +101,13 @@ it does not email the customer a few days before the release date, and it has no
 pre-order dates of many products at once. All three are part of the paid version, which can warn
 about a mixed cart or block checkout until it is split, but does not split it into two orders.
 
+= Where do I get the paid version? =
+
+From inside the plugin: WooCommerce > Pre-orders > Upgrade shows the plans and takes the payment
+without leaving your admin. The same plans, with prices, are at https://preorder.bitnarydigital.com.
+Buying gives you a licence key. Enter it in the free plugin and it updates itself to the paid
+version in place, keeping your dates and settings. Refunds are available for 14 days.
+
 = Does this work with High-Performance Order Storage (HPOS) and the cart/checkout blocks? =
 
 Yes. Both are declared compatible on `before_woocommerce_init` via

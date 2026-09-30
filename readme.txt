@@ -19,6 +19,8 @@ orders) and the release (when the product ships or becomes available).
 Two dates let a store say "we take orders until the 20th, and it ships on the 30th": a batch
 cutoff followed by a shared release.
 
+https://www.youtube.com/watch?v=x3bJ_zw5FQc
+
 While a product is in pre-order and before its cutoff, it is purchasable even if your normal
 stock settings would otherwise say no (out of stock, zero quantity, no backorders). After the
 cutoff, the product stops being purchasable everywhere WooCommerce checks that, including the

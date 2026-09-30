@@ -6,6 +6,10 @@ Most free WooCommerce pre-order plugins track a single "available on" date. This
 second, independent cutoff date, so you can say "we take orders until the 20th, and it ships on
 the 30th" instead of only "it ships on the 30th".
 
+[![Watch the 1-minute demo](https://img.youtube.com/vi/x3bJ_zw5FQc/hqdefault.jpg)](https://www.youtube.com/watch?v=x3bJ_zw5FQc)
+
+[Watch the 1-minute demo on YouTube](https://www.youtube.com/watch?v=x3bJ_zw5FQc)
+
 ## What it does
 
 - Per-product and per-variation pre-order toggle, with a cutoff and a release date/time, in your

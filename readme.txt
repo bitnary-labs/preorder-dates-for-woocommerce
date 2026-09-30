@@ -1,6 +1,6 @@
 === Bitnary Preorder Dates for WooCommerce ===
 Contributors: dvsouto
-Tags: pre-order, preorder, woocommerce, release date
+Tags: pre-order, pre-orders, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
@@ -8,7 +8,7 @@ Stable tag: 0.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sell on pre-order with two dates: when orders close and when the release ships.
+WooCommerce pre-orders with two dates: a cutoff when orders close and a release date when it ships. Per product or per variation.
 
 == Description ==
 

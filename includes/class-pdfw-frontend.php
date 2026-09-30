@@ -114,8 +114,10 @@ class PDFW_Frontend {
 	 * @return string
 	 */
 	public static function button_text( $text, $product = null ) {
-		if ( ! $product instanceof WC_Product ) {
-			global $product; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- WooCommerce core also falls back to the loop global here.
+		// Some themes call the filter without a product; WooCommerce itself then
+		// falls back to the loop's current product.
+		if ( ! $product instanceof WC_Product && isset( $GLOBALS['product'] ) ) {
+			$product = $GLOBALS['product'];
 		}
 
 		if ( $product instanceof WC_Product && 'open' === PDFW_Data::get_state( $product ) ) {

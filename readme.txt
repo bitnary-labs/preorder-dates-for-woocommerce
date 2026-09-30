@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.3
+Stable tag: 0.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,10 +16,8 @@ Bitnary Preorder Dates for WooCommerce adds a pre-order mode to simple products 
 product variations, with two independent dates: the cutoff (when the store stops accepting
 orders) and the release (when the product ships or becomes available).
 
-Most free pre-order plugins only track one date, usually "available on". That is enough if you
-want to sell an item before it exists in stock, but it does not let you say "we take orders
-until the 20th, and it ships on the 30th", which is how pre-orders actually work for a lot of
-small stores: a batch cutoff followed by a shared release.
+Two dates let a store say "we take orders until the 20th, and it ships on the 30th": a batch
+cutoff followed by a shared release.
 
 While a product is in pre-order and before its cutoff, it is purchasable even if your normal
 stock settings would otherwise say no (out of stock, zero quantity, no backorders). After the
@@ -131,6 +129,11 @@ timezone (`wp_timezone()`).
 
 == Changelog ==
 
+= 0.3.4 =
+* Fix: the pre-order button text reads the shop loop's product without
+  re-declaring the filter's own parameter as a global.
+* Change: "Tested up to" is declared in the readme only.
+
 = 0.3.3 =
 * New: "Settings" and "Get Pro" links in the plugins list, a short box about the
   paid version at the end of the Pre-orders screen, and one line about bulk
@@ -186,6 +189,9 @@ timezone (`wp_timezone()`).
   item, settings page, HPOS and cart/checkout blocks compatibility.
 
 == Upgrade Notice ==
+
+= 0.3.4 =
+Small fix to the pre-order button text in shop listings.
 
 = 0.3.3 =
 Adds a Settings link in the plugins list and short pointers to the paid version.

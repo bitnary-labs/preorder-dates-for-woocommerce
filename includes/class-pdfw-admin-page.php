@@ -17,8 +17,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class PDFW_Admin_Page {
 
-	// Defined in the main plugin file, because Freemius needs it before this
-	// class is loaded in order to hang its Account and Upgrade screens here.
+	// Defined in the main plugin file, because the paid build's Freemius setup
+	// needs it before this class is loaded, to hang its Account screen here.
 	const MENU_SLUG = PDFW_MENU_SLUG;
 
 	/**

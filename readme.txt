@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,14 +50,9 @@ What the free version does not do (see the FAQ): it does not warn about or block
 mixes pre-order and in-stock items, it does not email the customer before the release date, and
 it has no way to move the dates of many products at once.
 
-= Third-party service: Freemius =
+= Privacy =
 
-This plugin includes the Freemius SDK, which handles licensing, the account screen and updates
-for the paid version. On first use it asks whether you want to opt in to update notices and to
-share basic information about your WordPress environment. If you skip, nothing is sent and the
-plugin keeps working in full. If you opt in, that information goes to Freemius, Inc. under
-their terms (https://freemius.com/terms/) and privacy policy (https://freemius.com/privacy/).
-The free version makes no other external requests.
+The free version makes no external requests and collects no data.
 
 == Installation ==
 
@@ -103,10 +98,10 @@ about a mixed cart or block checkout until it is split, but does not split it in
 
 = Where do I get the paid version? =
 
-From inside the plugin: WooCommerce > Pre-orders > Upgrade shows the plans and takes the payment
-without leaving your admin. The same plans, with prices, are at https://preorder.bitnarydigital.com.
-Buying gives you a licence key. Enter it in the free plugin and it updates itself to the paid
-version in place, keeping your dates and settings. Refunds are available for 14 days.
+At https://preorder.bitnarydigital.com, also linked from WooCommerce > Settings > Products >
+Pre-order dates. The paid version is a separate download that replaces this plugin: deactivate
+this one, then upload and activate the paid one. Your dates and settings carry over. It is sold
+through Freemius, which handles the licence key and its updates. Refunds are available for 14 days.
 
 = Does this work with High-Performance Order Storage (HPOS) and the cart/checkout blocks? =
 
@@ -135,6 +130,12 @@ timezone (`wp_timezone()`).
 7. The Pre-orders screen under the WooCommerce menu.
 
 == Changelog ==
+
+= 0.3.2 =
+* Change: the WordPress.org version no longer includes the Freemius SDK, so it
+  makes no external requests. The SDK now ships only with the paid version.
+  The paid version is bought on the plugin's website instead of from an Upgrade
+  screen inside the plugin.
 
 = 0.3.1 =
 * Change: every function, class, hook, option and meta key now starts with
@@ -180,6 +181,9 @@ timezone (`wp_timezone()`).
   item, settings page, HPOS and cart/checkout blocks compatibility.
 
 == Upgrade Notice ==
+
+= 0.3.2 =
+Drops the Freemius SDK from the free version. Nothing on your store changes.
 
 = 0.3.1 =
 Renames the plugin's internal prefix. Your dates and settings carry over on their own.

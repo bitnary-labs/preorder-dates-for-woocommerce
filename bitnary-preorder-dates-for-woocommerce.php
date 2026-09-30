@@ -3,7 +3,7 @@
  * Plugin Name:       Bitnary Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
- * Version:           0.3.1
+ * Version:           0.3.2
  * Requires at least: 6.6
  * Tested up to:      7.1
  * Requires PHP:      8.1
@@ -21,66 +21,69 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PDFW_VERSION', '0.3.1' );
+define( 'PDFW_VERSION', '0.3.2' );
 define( 'PDFW_PLUGIN_FILE', __FILE__ );
 define( 'PDFW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PDFW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PDFW_MENU_SLUG', 'preorder-dates' );
 
-/**
- * Sets up Freemius, which handles licensing, the upgrade screens and updates
- * for the paid build.
- *
- * This runs in the free plugin too, and has to: it is what draws the Account
- * and Upgrade screens a customer uses, and what lets a licence activate in
- * place. On WordPress.org the SDK runs in its compliant mode, so it collects
- * nothing without opt-in.
- *
- * The paid build is this same plugin with a pro/ folder merged in, which is
- * why is_premium is read off the filesystem rather than hardcoded.
- *
- * @return Freemius
+/*
+ * Freemius handles licensing, the Account screen and updates for the paid
+ * build, which ships the SDK in freemius/. The WordPress.org version leaves
+ * that folder out, so none of this runs there and the free plugin makes no
+ * external requests.
  */
-function pdfw_fs() {
-	global $pdfw_fs;
+if ( is_readable( PDFW_PLUGIN_DIR . 'freemius/start.php' ) ) {
 
-	if ( ! isset( $pdfw_fs ) ) {
-		require_once PDFW_PLUGIN_DIR . 'freemius/start.php';
+	/**
+	 * Returns the Freemius instance, creating it on first use.
+	 *
+	 * The paid build is this same plugin with a pro/ folder merged in, which
+	 * is why is_premium is read off the filesystem rather than hardcoded.
+	 *
+	 * @return Freemius
+	 */
+	function pdfw_fs() {
+		global $pdfw_fs;
 
-		$pdfw_fs = fs_dynamic_init(
-			array(
-				'id'                  => '39537',
-				'slug'                => 'bitnary-preorder-dates-for-woocommerce',
-				'type'                => 'plugin',
-				// Public by design: it identifies the product to Freemius from
-				// the browser. The secret key is not in this repository and is
-				// never needed by the plugin.
-				'public_key'          => 'pk_e5aab1ef3cbc31bcd58445d6e4394',
-				'is_premium'          => is_readable( PDFW_PLUGIN_DIR . 'pro/load.php' ),
-				'has_premium_version' => true,
-				'has_paid_plans'      => true,
-				'has_addons'          => false,
-				'is_org_compliant'    => true,
-				'menu'                => array(
-					'slug'    => PDFW_MENU_SLUG,
-					'parent'  => array( 'slug' => 'woocommerce' ),
-					'support' => false,
-				),
-			)
-		);
+		if ( ! isset( $pdfw_fs ) ) {
+			require_once PDFW_PLUGIN_DIR . 'freemius/start.php';
+
+			$pdfw_fs = fs_dynamic_init(
+				array(
+					'id'                  => '39537',
+					'slug'                => 'bitnary-preorder-dates-for-woocommerce',
+					'type'                => 'plugin',
+					// Public by design: it identifies the product to Freemius from
+					// the browser. The secret key is not in this repository and is
+					// never needed by the plugin.
+					'public_key'          => 'pk_e5aab1ef3cbc31bcd58445d6e4394',
+					'is_premium'          => is_readable( PDFW_PLUGIN_DIR . 'pro/load.php' ),
+					'has_premium_version' => true,
+					'has_paid_plans'      => true,
+					'has_addons'          => false,
+					'is_org_compliant'    => true,
+					'menu'                => array(
+						'slug'    => PDFW_MENU_SLUG,
+						'parent'  => array( 'slug' => 'woocommerce' ),
+						'support' => false,
+					),
+				)
+			);
+		}
+
+		return $pdfw_fs;
 	}
 
-	return $pdfw_fs;
+	pdfw_fs();
+
+	/**
+	 * Fires once Freemius is ready, per its own convention.
+	 *
+	 * @since 0.3.0
+	 */
+	do_action( 'pdfw_fs_loaded' );
 }
-
-pdfw_fs();
-
-/**
- * Fires once Freemius is ready, per its own convention.
- *
- * @since 0.3.0
- */
-do_action( 'pdfw_fs_loaded' );
 
 require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-install.php';
 

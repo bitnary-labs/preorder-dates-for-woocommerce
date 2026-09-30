@@ -23,7 +23,7 @@ stage="$(mktemp -d)"
 trap 'rm -rf "${stage:?}"' EXIT
 ln -s "$here" "$stage/$slug"
 ( cd "$stage" && zip -rq "$zipfile" "$slug" \
-    -x "*/.*" "*/pro/*" \
+    -x "*/.*" "*/pro/*" "*/freemius/*" \
        "*/bin/*" "*/dist/*" "*/tests/*" "*/vendor/*" \
        "*/composer.json" "*/composer.lock" "*/phpunit.xml.dist" "*/README.md" )
 

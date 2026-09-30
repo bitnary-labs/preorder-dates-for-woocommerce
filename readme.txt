@@ -4,7 +4,7 @@ Tags: pre-order, preorder, woocommerce, release date
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 0.3.2
+Stable tag: 0.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,11 @@ timezone (`wp_timezone()`).
 
 == Changelog ==
 
+= 0.3.3 =
+* New: "Settings" and "Get Pro" links in the plugins list, a short box about the
+  paid version at the end of the Pre-orders screen, and one line about bulk
+  editing under the dates in the product's Pre-order tab. No admin notices.
+
 = 0.3.2 =
 * Change: the WordPress.org version no longer includes the Freemius SDK, so it
   makes no external requests. The SDK now ships only with the paid version.
@@ -181,6 +186,9 @@ timezone (`wp_timezone()`).
   item, settings page, HPOS and cart/checkout blocks compatibility.
 
 == Upgrade Notice ==
+
+= 0.3.3 =
+Adds a Settings link in the plugins list and short pointers to the paid version.
 
 = 0.3.2 =
 Drops the Freemius SDK from the free version. Nothing on your store changes.

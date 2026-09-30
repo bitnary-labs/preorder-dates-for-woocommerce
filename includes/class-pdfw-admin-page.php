@@ -159,10 +159,9 @@ class PDFW_Admin_Page {
 			/**
 			 * Fires at the end of the Pre-orders screen.
 			 *
-			 * The Pro add-on renders its own box here. Nothing in the free
-			 * plugin hooks this.
+			 * @param int $open_count Products and variations taking orders.
 			 */
-			do_action( 'pdfw_admin_page_after' );
+			do_action( 'pdfw_admin_page_after', count( $rows['open'] ) );
 			?>
 		</div>
 		<?php

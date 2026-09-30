@@ -26,5 +26,13 @@ defined( 'ABSPATH' ) || exit;
 			<input type="datetime-local" id="pdfw_release" name="pdfw_release" value="<?php echo esc_attr( $release ); ?>" />
 			<?php echo wc_help_tip( esc_html__( 'Once this date and time passes, pre-order is cleared automatically and the product behaves normally again. Store timezone.', 'bitnary-preorder-dates-for-woocommerce' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wc_help_tip() escapes internally. ?>
 		</p>
+		<?php
+		/**
+		 * Fires after the date fields in the product's Pre-order tab.
+		 *
+		 * @param WC_Product $product Product being edited.
+		 */
+		do_action( 'pdfw_product_panel_end', $product );
+		?>
 	</div>
 </div>

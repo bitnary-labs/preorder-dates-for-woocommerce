@@ -3,7 +3,7 @@
  * Plugin Name:       Bitnary Preorder Dates for WooCommerce
  * Plugin URI:        https://preorder.bitnarydigital.com
  * Description:       Sell on pre-order with two independent dates per product or variation: when orders stop and when the release ships.
- * Version:           0.3.2
+ * Version:           0.3.3
  * Requires at least: 6.6
  * Tested up to:      7.1
  * Requires PHP:      8.1
@@ -21,7 +21,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PDFW_VERSION', '0.3.2' );
+define( 'PDFW_VERSION', '0.3.3' );
 define( 'PDFW_PLUGIN_FILE', __FILE__ );
 define( 'PDFW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'PDFW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -132,6 +132,7 @@ function pdfw_bootstrap() {
 	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-order-meta.php';
 	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-cron.php';
 	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-admin-page.php';
+	require_once PDFW_PLUGIN_DIR . 'includes/class-pdfw-upsell.php';
 
 	add_action( 'woocommerce_after_register_post_type', array( 'PDFW_Install', 'migrate_legacy_prefix' ) );
 
@@ -143,6 +144,7 @@ function pdfw_bootstrap() {
 	PDFW_Order_Meta::init();
 	PDFW_Cron::init();
 	PDFW_Admin_Page::init();
+	PDFW_Upsell::init();
 
 	// The paid build of this plugin ships an extra pro/ folder next to these
 	// files. It is absent from the version on WordPress.org, so this does
